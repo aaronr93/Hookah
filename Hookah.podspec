@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Hookah"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "Hookah is a functional library for Swift. It’s inspired by Lo-Dash project."
   s.homepage     = "https://github.com/khoiln/Hookah"
   s.license      = { :type => "MIT", :file => "LICENSE" }

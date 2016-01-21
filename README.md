@@ -19,7 +19,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'Hookah', '~> 0.0.1'
+pod 'Hookah', '~> 0.0.2'
 ```
 
 Then, run the following command:
@@ -41,7 +41,7 @@ $ brew install carthage
 To integrate Alamofire into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "khoiln/Hookah" ~> 0.0.1
+github "khoiln/Hookah" ~> 0.0.2
 ```
 
 Run `carthage update` to build the framework and drag the built `Hookah.framework` into your Xcode project.
