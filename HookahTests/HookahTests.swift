@@ -230,9 +230,40 @@ class HookahTests: XCTestCase {
         XCTAssertEqual(Hookah.flattenDeep([[1],2,[3,[[4]],5],[[6,7],8],[[9]]] ), [1,2,3,4,5,6,7,8, 9], "Should deeply flatten the array")
     }
     
+    
+    func testDrop(){
+        let array = [1, 2, 3]
+        XCTAssertEqual(Hookah.drop(array), [2,3], "Should drop first element")
+        XCTAssertEqual(Hookah.drop(array, n: 2), [3], "should drop more than 1 element")
+        XCTAssertEqual(Hookah.drop(array, n: 9), [], "Should drop if n > length")
+        XCTAssertEqual(Hookah.drop(array, n: 0), array, "Should return array if n == 0")
+        XCTAssertEqual(Hookah.drop(array, n: -1), array, "Should return array if n < 1")
+    }
+    
+    func testDropRight(){
+        let array = [1, 2, 3]
+        XCTAssertEqual(Hookah.dropRight(array), [1,2], "Should drop last element")
+        XCTAssertEqual(Hookah.dropRight(array, n: 2), [1], "should drop more than 1 element")
+        XCTAssertEqual(Hookah.dropRight(array, n: 9), [], "Should drop if n > length")
+        XCTAssertEqual(Hookah.dropRight(array, n: 0), array, "Should return array if n == 0")
+        XCTAssertEqual(Hookah.dropRight(array, n: -1), array, "Should return array if n < 1")
+    }
+    
+    func testDropWhile(){
+        let arr = [1,2,3,4,5]
+        XCTAssertEqual(Hookah.dropWhile(arr){ $0 < 3 }, [3,4,5], "Should drop elemeent")
+    }
+    
+    func testDropRightWhile(){
+        let arr = [1,2,3,4,5]
+        XCTAssertEqual(Hookah.dropRightWhile(arr){ $0 > 3 }, [1,2,3], "Should drop right elemeent")
+    }
+    
     func testRandom() {
         let random = Hookah.random()
         XCTAssert(Hookah.some([0, 1]) {$0 == random}, "Should return 0 or 1")
         XCTAssertEqual(Hookah.random(lower:2,upper:2), 2, "Should return 2")
     }
+    
+    
 }

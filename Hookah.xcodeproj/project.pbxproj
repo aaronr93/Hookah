@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		191789A91C520286002EEDE1 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191789A81C520286002EEDE1 /* Number.swift */; };
+		191789AA1C520286002EEDE1 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191789A81C520286002EEDE1 /* Number.swift */; };
+		191789AB1C520286002EEDE1 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191789A81C520286002EEDE1 /* Number.swift */; };
+		191789AC1C520286002EEDE1 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191789A81C520286002EEDE1 /* Number.swift */; };
 		19722F851C4A4F90000AF706 /* Hookah.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19722F7A1C4A4F90000AF706 /* Hookah.framework */; };
 		19722F8A1C4A4F90000AF706 /* HookahTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19722F891C4A4F90000AF706 /* HookahTests.swift */; };
 		19E07A111C4F7DA6008F5401 /* Hookah.h in Headers */ = {isa = PBXBuildFile; fileRef = 19E07A0D1C4F7DA6008F5401 /* Hookah.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -39,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		191789A51C51E64F002EEDE1 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		191789A81C520286002EEDE1 /* Number.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
 		19722F7A1C4A4F90000AF706 /* Hookah.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Hookah.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		19722F841C4A4F90000AF706 /* HookahTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HookahTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19722F891C4A4F90000AF706 /* HookahTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HookahTests.swift; sourceTree = "<group>"; };
@@ -133,6 +138,7 @@
 				19E07A101C4F7DA6008F5401 /* Info.plist */,
 				19E07A241C4F8659008F5401 /* Array.swift */,
 				19E07A291C4F867F008F5401 /* String.swift */,
+				191789A81C520286002EEDE1 /* Number.swift */,
 				191789A51C51E64F002EEDE1 /* MyPlayground.playground */,
 			);
 			path = Source;
@@ -357,6 +363,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				191789A91C520286002EEDE1 /* Number.swift in Sources */,
 				19E07A2A1C4F867F008F5401 /* String.swift in Sources */,
 				19E07A151C4F7DA6008F5401 /* Hookah.swift in Sources */,
 				19E07A251C4F865A008F5401 /* Array.swift in Sources */,
@@ -375,6 +382,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				191789AA1C520286002EEDE1 /* Number.swift in Sources */,
 				19E07A2B1C4F867F008F5401 /* String.swift in Sources */,
 				19E07A161C4F7DA6008F5401 /* Hookah.swift in Sources */,
 				19E07A261C4F865A008F5401 /* Array.swift in Sources */,
@@ -385,6 +393,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				191789AB1C520286002EEDE1 /* Number.swift in Sources */,
 				19E07A2C1C4F867F008F5401 /* String.swift in Sources */,
 				19E07A171C4F7DA6008F5401 /* Hookah.swift in Sources */,
 				19E07A271C4F865A008F5401 /* Array.swift in Sources */,
@@ -395,6 +404,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				191789AC1C520286002EEDE1 /* Number.swift in Sources */,
 				19E07A2D1C4F867F008F5401 /* String.swift in Sources */,
 				19E07A181C4F7DA6008F5401 /* Hookah.swift in Sources */,
 				19E07A281C4F865A008F5401 /* Array.swift in Sources */,

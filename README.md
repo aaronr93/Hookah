@@ -1,4 +1,4 @@
-Hookah [![Build Status](https://travis-ci.org/khoiln/Hookah.svg?branch=master)](https://travis-ci.org/khoiln/Hookah) ![CocoaPods](https://img.shields.io/cocoapods/v/Hookah.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Platform](https://img.shields.io/cocoapods/p/Hookah.svg?style=flat)](http://cocoadocs.org/docsets/Hookah) [![Twitter](https://img.shields.io/badge/twitter-@khoigeeky-blue.svg?style=flat)](http://twitter.com/khoigeeky)
+Hookah [![Build Status](https://travis-ci.org/khoiln/Hookah.svg?branch=master)](https://travis-ci.org/khoiln/Hookah) ![CocoaPods](https://img.shields.io/cocoapods/v/Hookah.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Platform](https://img.shields.io/cocoapods/p/Hookah.svg?style=flat)](http://cocoadocs.org/docsets/Hookah)
 ===========
 Hookah is a functional library for Swift. It's inspired by Lo-Dash project.
 
@@ -539,6 +539,98 @@ Creates a new array concatenating additional arrays.
 #### Return ####
 
 The new concatenated array.
+
+### `Hookah.drop`
+
+```swift
+Hookah.drop<T>(array: [T], n: Int = 1) -> [T]
+```
+
+```swift
+Hookah.drop([1, 2, 3])
+// -> [2,3]
+Hookah.drop([1, 2, 3], n: 2)
+// -> [3]
+```
+
+Creates a slice of array with n elements dropped from the beginning.
+
+#### Arguments ####
+
+- array: The array to query.
+- n: The number of elements to drop. `1` by default.
+
+#### Return ####
+
+Returns the slice of array.
+
+### `Hookah.dropRight`
+
+```swift
+Hookah.dropRight<T>(array: [T], n: Int = 1) -> [T]
+```
+
+```swift
+Hookah.dropRight([1, 2, 3])
+// -> [1,2]
+Hookah.dropRight([1, 2, 3], n: 2)
+// -> [1]
+```
+
+Creates a slice of array with n elements dropped from the end.
+
+#### Arguments ####
+
+- array: The array to query.
+- n: The number of elements to drop. `1` by default.
+
+#### Return ####
+
+Returns the slice of array.
+
+### `Hookah.dropRightWhile`
+
+```swift
+Hookah.dropRightWhile<T>(array: [T], predicate: T -> Bool) -> [T]
+```
+
+```swift
+Hookah.dropRightWhile([1, 2, 3, 4, 5]){$0 > 3}
+// -> [1,2,3]
+```
+
+Creates a slice of array excluding elements dropped from the end. Elements are dropped until predicate returns false.
+
+#### Arguments ####
+
+- array: The array to query.
+- predicate: The function invoked per iteration.
+
+#### Return ####
+
+Returns the slice of array.
+
+### `Hookah.dropWhile`
+
+```swift
+Hookah.dropWhile<T>(array: [T], predicate: T -> Bool) -> [T]
+```
+
+```swift
+Hookah.dropWhile([1, 2, 3, 4, 5]){$0 < 3}
+// -> [3,4,5]
+```
+
+Creates a slice of array excluding elements dropped from the beginning. Elements are dropped until predicate returns false.
+
+#### Arguments ####
+
+- array: The array to query.
+- predicate: The function invoked per iteration.
+
+#### Return ####
+
+Returns the slice of array.
 
 ### `Hookah.flatten`
 
