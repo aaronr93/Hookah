@@ -240,6 +240,15 @@ class HookahTests: XCTestCase {
         XCTAssertEqual(Hookah.drop(array, n: -1), array, "Should return array if n < 1")
     }
     
+    func testDropRight(){
+        let array = [1, 2, 3]
+        XCTAssertEqual(Hookah.dropRight(array), [1,2], "Should drop last element")
+        XCTAssertEqual(Hookah.dropRight(array, n: 2), [1], "should drop more than 1 element")
+        XCTAssertEqual(Hookah.dropRight(array, n: 9), [], "Should drop if n > length")
+        XCTAssertEqual(Hookah.dropRight(array, n: 0), array, "Should return array if n == 0")
+        XCTAssertEqual(Hookah.dropRight(array, n: -1), array, "Should return array if n < 1")
+    }
+    
     func testRandom() {
         let random = Hookah.random()
         XCTAssert(Hookah.some([0, 1]) {$0 == random}, "Should return 0 or 1")

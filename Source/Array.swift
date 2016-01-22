@@ -154,6 +154,19 @@ extension Hookah{
         return slice(array, start: n < 0 ? 0 : n, end: array.count)
     }
     
+    /**
+     Creates a slice of array with n elements dropped from the end.
+     
+     - parameter array: The array to query.
+     - parameter n:     The number of elements to drop.
+     
+     - returns: Returns the slice of array.
+     */
+    public class func dropRight<T>(array: [T], n: Int = 1) -> [T]{
+        let end = array.count - n
+        return slice(array, start: 0, end: end < 0 ? 0 : end)
+    }
+    
     public class func difference<T where T: Equatable>(array: [T], comparedArrs: [T]...) -> [T]{
         //TODO: Come back when finish filter and contains
         let result = [T]()

@@ -606,6 +606,30 @@ Creates a slice of array with n elements dropped from the beginning.
 
 Returns the slice of array.
 
+### `Hookah.dropRight`
+
+```swift
+Hookah.dropRight<T>(array: [T], n: Int = 1) -> [T]
+```
+
+```swift
+Hookah.dropRight([1, 2, 3])
+// -> [1,2]
+Hookah.dropRight([1, 2, 3], n: 2)
+// -> [1]
+```
+
+Creates a slice of array with n elements dropped from the end.
+
+#### Arguments ####
+
+- array: The array to query.
+- n: The number of elements to drop. `1` by default.
+
+#### Return ####
+
+Returns the slice of array.
+
 ### `Hookah.slice`
 
 ```swift
