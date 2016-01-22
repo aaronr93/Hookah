@@ -2,7 +2,7 @@
 //  String.swift
 //  Hookah
 //
-//  Created by baga on 1/20/16.
+//  Created by khoi on 1/20/16.
 //  Copyright © 2016 Khoi Lai. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  Array.swift
 //  Hookah
 //
-//  Created by baga on 1/20/16.
+//  Created by khoi on 1/20/16.
 //  Copyright © 2016 Khoi Lai. All rights reserved.
 //
 
@@ -166,6 +166,8 @@ extension Hookah{
         let end = array.count - n
         return slice(array, start: 0, end: end < 0 ? 0 : end)
     }
+    
+    
     
     public class func difference<T where T: Equatable>(array: [T], comparedArrs: [T]...) -> [T]{
         //TODO: Come back when finish filter and contains
