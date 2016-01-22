@@ -28,7 +28,7 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="hookah">Hookah <a href="https://travis-ci.org/khoiln/Hookah"><img alt="Build Status" src="https://travis-ci.org/khoiln/Hookah.svg?branch=master" /></a> <img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/Hookah.svg" /> <a href="https://github.com/Carthage/Carthage"><img alt="Carthage compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a> <a href="http://cocoadocs.org/docsets/Hookah"><img alt="Platform" src="https://img.shields.io/cocoapods/p/Hookah.svg?style=flat" /></a> <a href="http://twitter.com/khoigeeky"><img alt="Twitter" src="https://img.shields.io/badge/twitter-@khoigeeky-blue.svg?style=flat" /></a></h1>
+        <h1 id="hookah">Hookah <a href="https://travis-ci.org/khoiln/Hookah"><img alt="Build Status" src="https://travis-ci.org/khoiln/Hookah.svg?branch=master" /></a> <img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/Hookah.svg" /> <a href="https://github.com/Carthage/Carthage"><img alt="Carthage compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a> <a href="http://cocoadocs.org/docsets/Hookah"><img alt="Platform" src="https://img.shields.io/cocoapods/p/Hookah.svg?style=flat" /></a></h1>
 
 <p>Hookah is a functional library for Swift. It&rsquo;s inspired by Lo-Dash project.</p>
 
@@ -539,6 +539,90 @@
 <h4 id="return">Return</h4>
 
 <p>The new concatenated array.</p>
+
+<h3 id="hookah-drop"><code class="prettyprint">Hookah.drop</code></h3>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">drop</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">array</span><span class="p">:</span> <span class="p">[</span><span class="kt">T</span><span class="p">],</span> <span class="nv">n</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="nf">drop</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="c1">// -&gt; [2,3]</span>
+<span class="kt">Hookah</span><span class="o">.</span><span class="nf">drop</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="nv">n</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1">// -&gt; [3]</span>
+</code></pre>
+
+<p>Creates a slice of array with n elements dropped from the beginning.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<ul>
+<li>array: The array to query.</li>
+<li>n: The number of elements to drop. <code class="prettyprint">1</code> by default.</li>
+</ul>
+
+<h4 id="return">Return</h4>
+
+<p>Returns the slice of array.</p>
+
+<h3 id="hookah-dropright"><code class="prettyprint">Hookah.dropRight</code></h3>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">dropRight</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">array</span><span class="p">:</span> <span class="p">[</span><span class="kt">T</span><span class="p">],</span> <span class="nv">n</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="nf">dropRight</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="c1">// -&gt; [1,2]</span>
+<span class="kt">Hookah</span><span class="o">.</span><span class="nf">dropRight</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="nv">n</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1">// -&gt; [1]</span>
+</code></pre>
+
+<p>Creates a slice of array with n elements dropped from the end.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<ul>
+<li>array: The array to query.</li>
+<li>n: The number of elements to drop. <code class="prettyprint">1</code> by default.</li>
+</ul>
+
+<h4 id="return">Return</h4>
+
+<p>Returns the slice of array.</p>
+
+<h3 id="hookah-droprightwhile"><code class="prettyprint">Hookah.dropRightWhile</code></h3>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">dropRightWhile</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">array</span><span class="p">:</span> <span class="p">[</span><span class="kt">T</span><span class="p">],</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt">T</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="nf">dropRightWhile</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]){</span><span class="nv">$0</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">}</span>
+<span class="c1">// -&gt; [1,2,3]</span>
+</code></pre>
+
+<p>Creates a slice of array excluding elements dropped from the end. Elements are dropped until predicate returns false.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<ul>
+<li>array: The array to query.</li>
+<li>predicate: The function invoked per iteration.</li>
+</ul>
+
+<h4 id="return">Return</h4>
+
+<p>Returns the slice of array.</p>
+
+<h3 id="hookah-dropwhile"><code class="prettyprint">Hookah.dropWhile</code></h3>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">dropWhile</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">array</span><span class="p">:</span> <span class="p">[</span><span class="kt">T</span><span class="p">],</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt">T</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="nf">dropWhile</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]){</span><span class="nv">$0</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">}</span>
+<span class="c1">// -&gt; [3,4,5]</span>
+</code></pre>
+
+<p>Creates a slice of array excluding elements dropped from the beginning. Elements are dropped until predicate returns false.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<ul>
+<li>array: The array to query.</li>
+<li>predicate: The function invoked per iteration.</li>
+</ul>
+
+<h4 id="return">Return</h4>
+
+<p>Returns the slice of array.</p>
 
 <h3 id="hookah-flatten"><code class="prettyprint">Hookah.flatten</code></h3>
 <pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">flatten</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">array</span><span class="p">:</span> <span class="p">[</span><span class="kt">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span>
