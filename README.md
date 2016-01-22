@@ -610,14 +610,14 @@ Creates a slice of array excluding elements dropped from the end. Elements are d
 
 Returns the slice of array.
 
-### `Hookah.dropRight`
+### `Hookah.dropWhile`
 
 ```swift
-Hookah.dropRight<T>(array: [T], predicate: T -> Bool) -> [T]
+Hookah.dropWhile<T>(array: [T], predicate: T -> Bool) -> [T]
 ```
 
 ```swift
-Hookah.dropRight([1, 2, 3, 4, 5]){$0 < 3}
+Hookah.dropWhile([1, 2, 3, 4, 5]){$0 < 3}
 // -> [3,4,5]
 ```
 
