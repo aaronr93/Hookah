@@ -292,6 +292,18 @@ class HookahTests: XCTestCase {
 
     }
     
+    func testFindIndex(){
+        let arr = [1,2,3,4]
+        XCTAssertEqual(Hookah.findIndex(arr) { $0 % 2 == 0 } , 1, "Should find first number")
+        XCTAssertEqual(Hookah.findIndex(arr) { $0 > 100 } , -1, "Should return -1 if not found")
+    }
+    
+    func testFindLastIndex(){
+        let arr = [1,2,3,4]
+        XCTAssertEqual(Hookah.findLastIndex(arr) { $0 % 2 == 0 } , 3, "Should find first number")
+        XCTAssertEqual(Hookah.findLastIndex(arr) { $0 > 100 } , -1, "Should return -1 if not found")
+    }
+    
     func testRandom() {
         let random = Hookah.random()
         XCTAssert(Hookah.some([0, 1]) {$0 == random}, "Should return 0 or 1")

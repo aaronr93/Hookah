@@ -233,5 +233,38 @@ extension Hookah{
         self.fill(&array, value: value, indexes: indexes)
     }
     
+    private class func baseFindIndex<T>(array: [T], fromRight: Bool = false, predicate: T -> Bool) -> Int{
+        let length = array.count
+        var index = fromRight ? length : -1;
+        while fromRight ? index-- > 0 : ++index < length {
+            if predicate(array[index])  {
+                return index;
+            }
+        }
+        return -1;
+    }
     
+    /**
+     This method is like Hookah.find except that it returns the index of the first element predicate returns true for instead of the element itself.
+     
+     - parameter array:     The array to search.
+     - parameter predicate: The function invoked per iteration.
+     
+     - returns: Returns the index of the found element, else -1.
+     */
+    public class func findIndex<T>(array: [T], predicate: T -> Bool) -> Int{
+        return baseFindIndex(array, fromRight: false, predicate: predicate)
+    }
+    
+    /**
+     This method is like Hookah.findIndex except that it iterates over elements of array from right to left.
+     
+     - parameter array:     The array to search.
+     - parameter predicate: The function invoked per iteration.
+     
+     - returns: Returns the index of the found element, else -1.
+     */
+    public class func findLastIndex<T>(array: [T], predicate: T -> Bool) -> Int{
+        return baseFindIndex(array, fromRight: true, predicate: predicate)
+    }
 }
