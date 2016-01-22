@@ -674,6 +674,97 @@ This method is like Hookah.flatten except that it recursively flattens array.
 
 The new flattened array.
 
+### `Hookah.fill` (value, indexes)
+
+```swift
+Hookah.fill<T>(inout array: [T], value: T, indexes: [Int])
+```
+
+```swift
+var array = [1,2,3,4]
+Hookah.fill(&array, value: 0, indexes: [1,3])
+print(array)
+-> logs [1,0,3,0]
+```
+
+Fill elements of array in indexes with value.
+
+**NOTE:** This method mutates array.
+
+#### Arguments ####
+
+- array:   The pointer of the array to fill.
+- value:   The value to fill the array with
+- indexes: The indexes that the value will be filled.
+
+### `Hookah.fill` (value, start, end)
+
+```swift
+Hookah.fill<T>(inout array: [T], value: T, start: Int = 0, end: Int? = nil)
+```
+
+```swift
+var array = [1,2,3,4]
+Hookah.fill(&array, value: 0, start: 0, end: 2)
+print(array)
+-> logs [0,0,3,4]
+```
+
+Fill elements of array with value from start upto, but not including end.
+
+**NOTE:** This method mutates array.
+
+#### Arguments ####
+
+- array: The pointer of the array to fill.
+- value: The value to fill the array with.
+- start: The start position. `0` by default.
+- end:   The end position. `nil` by default.
+
+### `Hookah.findIndex`
+
+```swift
+Hookah.findIndex<T>(array: [T], predicate: T -> Bool) -> Int
+```
+
+```swift
+Hookah.findIndex([1,2,3,4]) { $0 % 2 == 0 }
+// -> 1 // index of 2
+```
+
+This method is like Hookah.find except that it returns the index of the first element predicate returns true for instead of the element itself.
+
+#### Arguments ####
+
+- array: The array to search.
+- predicate: The function invoked per iteration.
+
+#### Return ####
+
+Returns the index of the found element, else -1.
+
+### `Hookah.findLastIndex`
+
+```swift
+Hookah.findLastIndex<T>(array: [T], predicate: T -> Bool) -> Int
+```
+
+```swift
+Hookah.findLastIndex([1,2,3,4]) { $0 % 2 == 0 }
+// -> 3 // index of 4
+```
+
+This method is like Hookah.findIndex except that it iterates over elements of array from right to left.
+
+#### Arguments ####
+
+- array: The array to search.
+- predicate: The function invoked per iteration.
+
+#### Return ####
+
+Returns the index of the found element, else -1.
+
 ### `Hookah.slice`
 
 ```swift
