@@ -259,6 +259,39 @@ class HookahTests: XCTestCase {
         XCTAssertEqual(Hookah.dropRightWhile(arr){ $0 > 3 }, [1,2,3], "Should drop right elemeent")
     }
     
+    func testFillIndexes(){
+        var arr = [1,2,3,4]
+        
+        Hookah.fill(&arr, value: 0, indexes: [0])
+        XCTAssertEqual(arr, [0,2,3,4], "Should work with 1 index")
+        
+        Hookah.fill(&arr, value: 9, indexes: [2,3])
+        XCTAssertEqual(arr, [0,2,9,9], "Should work with multipe indexes")
+        
+        Hookah.fill(&arr, value: 88, indexes: [-3,43,234,-1])
+        XCTAssertEqual(arr, [0,2,9,9], "Should work with index out of bound")
+    }
+    
+    func testFill(){
+        var array = [1, 2, 3]
+        
+        Hookah.fill(&array, value: 99)
+        XCTAssertEqual(array, [99,99,99], "Should fill all values if no start and end defined")
+        
+        Hookah.fill(&array, value: 88, start: 1)
+        XCTAssertEqual(array, [99,88,88], "Should work with start")
+        
+        Hookah.fill(&array, value: 100, start: 0, end: 0)
+        XCTAssertEqual(array, [99,88,88], "Should work with end = 0")
+        
+        Hookah.fill(&array, value: 100, start: 99, end: 99)
+        XCTAssertEqual(array, [99,88,88], "Should work if start is out of bound")
+        
+        Hookah.fill(&array, value: 100, start: 1, end: 3)
+        XCTAssertEqual(array, [99,100,100], "Should work if both start and end provide")
+
+    }
+    
     func testRandom() {
         let random = Hookah.random()
         XCTAssert(Hookah.some([0, 1]) {$0 == random}, "Should return 0 or 1")

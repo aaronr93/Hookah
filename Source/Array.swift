@@ -199,6 +199,39 @@ extension Hookah{
         return baseWhile(array, predicate: predicate, isDrop: true, fromRight: true)
     }
     
+    /**
+     Fill elements of array in indexes with value.
+     
+     Note: This method mutates array
+     
+     - parameter array:   The pointer of the array to fill.
+     - parameter value:   The value to fill the array with
+     - parameter indexes: The indexes that the value will be filled.
+     */
+    public class func fill<T>(inout array: [T], value: T, indexes: [Int]){
+        indexes.forEach { (idx) -> () in
+            if case 0..<array.count = idx {
+                array[idx] = value
+            }
+        }
+    }
+    
+    /**
+     Fill elements of array with value from start upto, but not including end.
+     
+     - parameter array: The pointer of the array to fill.
+     - parameter value: The value to fill the array with.
+     - parameter start: The start position. `0` by default.
+     - parameter end:   The end position. `nil` by default.
+     */
+    public class func fill<T>(inout array: [T], value: T, start: Int = 0, end: Int? = nil) {
+        var end = end ?? array.count
+        if end > array.count {
+            end = array.count
+        }
+        let indexes = Array<Int>(start..<(start + end))
+        self.fill(&array, value: value, indexes: indexes)
+    }
     
     
 }
