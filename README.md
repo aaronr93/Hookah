@@ -582,6 +582,30 @@ This method is like Hookah.flatten except that it recursively flattens array.
 
 The new flattened array.
 
+### `Hookah.drop`
+
+```swift
+Hookah.drop<T>(array: [T], n: Int = 1) -> [T]
+```
+
+```swift
+Hookah.drop([1, 2, 3])
+// -> [2,3]
+Hookah.drop([1, 2, 3], n: 2)
+// -> [3]
+```
+
+Creates a slice of array with n elements dropped from the beginning.
+
+#### Arguments ####
+
+- array: The array to query.
+- n: The number of elements to drop. `1` by default.
+
+#### Return ####
+
+Returns the slice of array.
+
 ### `Hookah.slice`
 
 ```swift

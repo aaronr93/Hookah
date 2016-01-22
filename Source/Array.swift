@@ -142,6 +142,17 @@ extension Hookah{
         return _baseFlatten(array, isDeep:true)
     }
     
+    /**
+     Creates a slice of array with n elements dropped from the beginning.
+     
+     - parameter array: The array to query.
+     - parameter n:     The number of elements to drop.
+     
+     - returns: Returns the slice of array.
+     */
+    public class func drop<T>(array: [T], n: Int = 1) -> [T]{
+        return slice(array, start: n < 0 ? 0 : n, end: array.count)
+    }
     
     public class func difference<T where T: Equatable>(array: [T], comparedArrs: [T]...) -> [T]{
         //TODO: Come back when finish filter and contains
