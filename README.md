@@ -540,48 +540,6 @@ Creates a new array concatenating additional arrays.
 
 The new concatenated array.
 
-### `Hookah.flatten`
-
-```swift
-Hookah.flatten<T>(array: [T]) -> [T]
-```
-
-```swift
-Hookah.flatten([1, [2, 3, [4]]] as [NSObject])
-// -> [1, 2, 3, [4]
-```
-
-Flatten array one level.
-
-#### Arguments ####
-
-- array: The array to flatten.
-
-#### Return ####
-
-The new flattened array.
-
-### `Hookah.flattenDeep`
-
-```swift
-Hookah.flattenDeep<T>(array: [T]) -> [T]
-```
-
-```swift
-Hookah.flattenDeep([[1],2,[3,[[4]],5],[[6,7],8],[[9]]])
-// -> [1,2,3,4,5,6,7,8,9]
-```
-
-This method is like Hookah.flatten except that it recursively flattens array.
-
-#### Arguments ####
-
-- array: The array to flatten.
-
-#### Return ####
-
-The new flattened array.
-
 ### `Hookah.drop`
 
 ```swift
@@ -629,6 +587,48 @@ Creates a slice of array with n elements dropped from the end.
 #### Return ####
 
 Returns the slice of array.
+
+### `Hookah.flatten`
+
+```swift
+Hookah.flatten<T>(array: [T]) -> [T]
+```
+
+```swift
+Hookah.flatten([1, [2, 3, [4]]] as [NSObject])
+// -> [1, 2, 3, [4]
+```
+
+Flatten array one level.
+
+#### Arguments ####
+
+- array: The array to flatten.
+
+#### Return ####
+
+The new flattened array.
+
+### `Hookah.flattenDeep`
+
+```swift
+Hookah.flattenDeep<T>(array: [T]) -> [T]
+```
+
+```swift
+Hookah.flattenDeep([[1],2,[3,[[4]],5],[[6,7],8],[[9]]])
+// -> [1,2,3,4,5,6,7,8,9]
+```
+
+This method is like Hookah.flatten except that it recursively flattens array.
+
+#### Arguments ####
+
+- array: The array to flatten.
+
+#### Return ####
+
+The new flattened array.
 
 ### `Hookah.slice`
 
