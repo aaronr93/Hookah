@@ -24,6 +24,9 @@
       <img src="images/logo.png" />
       <div id="toc">
       </div>
+      <ul class ="toc-footer">
+        <li><a class="github-button" href="https://github.com/khoiln/Hookah" data-icon="octicon-star" data-count-href="/khoiln/Hookah/stargazers" data-count-api="/repos/khoiln/Hookah#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star khoiln/Hookah on GitHub">Star</a> <a class="github-button" href="https://github.com/khoiln/Hookah/fork" data-icon="octicon-repo-forked" data-count-href="/khoiln/Hookah/network" data-count-api="/repos/khoiln/Hookah#forks_count" data-count-aria-label="# forks on GitHub" aria-label="Fork khoiln/Hookah on GitHub">Fork</a></li>
+      </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
@@ -662,6 +665,89 @@
 
 <p>The new flattened array.</p>
 
+<h3 id="hookah-fill-value-indexes"><code class="prettyprint">Hookah.fill</code> (value, indexes)</h3>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">fill</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="k">inout</span> <span class="nv">array</span><span class="p">:</span> <span class="p">[</span><span class="kt">T</span><span class="p">],</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="nv">indexes</span><span class="p">:</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="kt">Hookah</span><span class="o">.</span><span class="nf">fill</span><span class="p">(</span><span class="o">&amp;</span><span class="n">array</span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">indexes</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+<span class="o">-&gt;</span> <span class="n">logs</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+</code></pre>
+
+<p>Fill elements of array in indexes with value.</p>
+
+<p><strong>NOTE:</strong> This method mutates array.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<ul>
+<li>array:   The pointer of the array to fill.</li>
+<li>value:   The value to fill the array with</li>
+<li>indexes: The indexes that the value will be filled.</li>
+</ul>
+
+<h3 id="hookah-fill-value-start-end"><code class="prettyprint">Hookah.fill</code> (value, start, end)</h3>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">fill</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="k">inout</span> <span class="nv">array</span><span class="p">:</span> <span class="p">[</span><span class="kt">T</span><span class="p">],</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="nv">start</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">end</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="kt">Hookah</span><span class="o">.</span><span class="nf">fill</span><span class="p">(</span><span class="o">&amp;</span><span class="n">array</span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">start</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">end</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+<span class="o">-&gt;</span> <span class="n">logs</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+</code></pre>
+
+<p>Fill elements of array with value from start upto, but not including end.</p>
+
+<p><strong>NOTE:</strong> This method mutates array.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<ul>
+<li>array: The pointer of the array to fill.</li>
+<li>value: The value to fill the array with.</li>
+<li>start: The start position. <code class="prettyprint">0</code> by default.</li>
+<li>end:   The end position. <code class="prettyprint">nil</code> by default.</li>
+</ul>
+
+<h3 id="hookah-findindex"><code class="prettyprint">Hookah.findIndex</code></h3>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">findIndex</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">array</span><span class="p">:</span> <span class="p">[</span><span class="kt">T</span><span class="p">],</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt">T</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="nf">findIndex</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span> <span class="p">{</span> <span class="nv">$0</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">}</span>
+<span class="c1">// -&gt; 1 // index of 2</span>
+</code></pre>
+
+<p>This method is like Hookah.find except that it returns the index of the first element predicate returns true for instead of the element itself.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<ul>
+<li>array: The array to search.</li>
+<li>predicate: The function invoked per iteration.</li>
+</ul>
+
+<h4 id="return">Return</h4>
+
+<p>Returns the index of the found element, else -1.</p>
+
+<h3 id="hookah-findlastindex"><code class="prettyprint">Hookah.findLastIndex</code></h3>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">findLastIndex</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">array</span><span class="p">:</span> <span class="p">[</span><span class="kt">T</span><span class="p">],</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt">T</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="nf">findLastIndex</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span> <span class="p">{</span> <span class="nv">$0</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">}</span>
+<span class="c1">// -&gt; 3 // index of 4</span>
+</code></pre>
+
+<p>This method is like Hookah.findIndex except that it iterates over elements of array from right to left.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<ul>
+<li>array: The array to search.</li>
+<li>predicate: The function invoked per iteration.</li>
+</ul>
+
+<h4 id="return">Return</h4>
+
+<p>Returns the index of the found element, else -1.</p>
+
 <h3 id="hookah-slice"><code class="prettyprint">Hookah.slice</code></h3>
 <pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">slice</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">array</span><span class="p">:</span> <span class="p">[</span><span class="kt">T</span><span class="p">],</span> <span class="nv">start</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">end</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span>
 </code></pre>
@@ -693,5 +779,6 @@
       <div class="dark-box">
       </div>
     </div>
+  <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>
