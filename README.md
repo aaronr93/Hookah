@@ -52,7 +52,9 @@ Run `carthage update` to build the framework and drag the built `Hookah.framewor
 
 ### `Hookah.each` -> `Hookah.forEach`
 
->Hookah.each<T where T:CollectionType>(collection: T,@noescape iteratee: T.Generator.Element throws -> ()) rethrows
+```swift
+Hookah.each<T where T:CollectionType>(collection: T,@noescape iteratee: T.Generator.Element throws -> ()) rethrows
+```
 
 ```swift
 Hookah.each([1,2]){ print($0) }
@@ -77,7 +79,9 @@ Iterates over elements of collection invoking iteratee function on each element.
 
 ### `Hookah.eachRight` -> `Hookah.forEachRight`
 
->Hookah.eachRight<T where T:CollectionType, T.Index == Int>(collection: T,@noescape iteratee: T.Generator.Element throws -> ()) rethrows
+```swift
+Hookah.eachRight<T where T:CollectionType, T.Index == Int>(collection: T,@noescape iteratee: T.Generator.Element throws -> ()) rethrows
+```
 
 ```swift
 Hookah.eachRight([1,2]){ print($0) }
@@ -98,7 +102,9 @@ This is like Hookah.each except that it iterates over elements of collection fro
 
 ### `Hookah.every`
 
->Hookah.every<T where T:CollectionType>(collection: T,@noescape predicate: T.Generator.Element throws -> Bool) rethrows -> Bool
+```swift
+Hookah.every<T where T:CollectionType>(collection: T,@noescape predicate: T.Generator.Element throws -> Bool) rethrows -> Bool
+```
 
 ```swift
 Hookah.every([0, 10, 28]){ $0 % 2 == 0 }
@@ -122,7 +128,9 @@ Returns true if all elements pass the predicate check, else false.
 
 ### `Hookah.filter`
 
->Hookah.filter<T where T:CollectionType>(collection: T,@noescape predicate: T.Generator.Element throws -> Bool) rethrows -> [T.Generator.Element]
+```swift
+Hookah.filter<T where T:CollectionType>(collection: T,@noescape predicate: T.Generator.Element throws -> Bool) rethrows -> [T.Generator.Element]
+```
 
 ```swift
 Hookah.filter([1, 2, 4]){ $0 % 2 == 0 }
@@ -146,7 +154,9 @@ Returns the new filtered array.
 
 ### `Hookah.find`
 
->Hookah.find<T where T:CollectionType>(collection: T,@noescape predicate: T.Generator.Element throws -> Bool) rethrows -> T.Generator.Element?
+```swift
+Hookah.find<T where T:CollectionType>(collection: T,@noescape predicate: T.Generator.Element throws -> Bool) rethrows -> T.Generator.Element?
+```
 
 ```swift
 Hookah.find([1, 2, 4]){ $0 % 2 == 0 }
@@ -170,7 +180,9 @@ Returns the matched element, else nil.
 
 ### `Hookah.findLast`
 
->Hookah.findLast<T where T:CollectionType>(collection: T,@noescape predicate: T.Generator.Element throws -> Bool) rethrows -> T.Generator.Element?
+```swift
+Hookah.findLast<T where T:CollectionType>(collection: T,@noescape predicate: T.Generator.Element throws -> Bool) rethrows -> T.Generator.Element?
+```
 
 ```swift
 Hookah.findLast([1, 2, 4]){ $0 % 2 == 0 }
@@ -189,7 +201,9 @@ Returns the matched element, else nil.
 
 ### `Hookah.groupBy`
 
->Hookah.groupBy<T where T:CollectionType>(collection: T, @noescape iteratee: T.Generator.Element throws -> String) rethrows -> [String: [T.Generator.Element]]
+```swift
+Hookah.groupBy<T where T:CollectionType>(collection: T, @noescape iteratee: T.Generator.Element throws -> String) rethrows -> [String: [T.Generator.Element]]
+```
 
 ```swift
 Hookah.groupBy([1,2,3,4,5]){ $0 % 2 == 0 ? "even" : "odd" }
@@ -209,7 +223,9 @@ Returns the dictionary [String: [T]]
 
 ### `Hookah.includes`
 
->Hookah.includes<T where T: CollectionType, T.Generator.Element: Equatable>(collection: T, value: T.Generator.Element) -> Bool
+```swift
+Hookah.includes<T where T: CollectionType, T.Generator.Element: Equatable>(collection: T, value: T.Generator.Element) -> Bool
+```
 
 ```swift
 Hookah.includes([1,2,3,4,5], value: 5)
@@ -228,7 +244,9 @@ Boolean determined whether the value is presented.
 
 ### `Hookah.map`
 
->Hookah.map<T: CollectionType, E>(collection: T,@noescape transform: T.Generator.Element throws -> E ) rethrows -> [E]
+```swift
+Hookah.map<T: CollectionType, E>(collection: T,@noescape transform: T.Generator.Element throws -> E ) rethrows -> [E]
+```
 
 ```swift
 func double(a: Int) -> Int{
@@ -250,7 +268,9 @@ The new mapped array.
 
 ### `Hookah.reduce`
 
->Hookah.reduce<T,E where T:CollectionType>(collection: T,initial: E,  @noescape combine: (E, T.Generator.Element) throws -> E) rethrows -> E
+```swift
+Hookah.reduce<T,E where T:CollectionType>(collection: T,initial: E,  @noescape combine: (E, T.Generator.Element) throws -> E) rethrows -> E
+```
 
 ```swift
 Hookah.reduce([1,2,3], initial: 0) { $0 + $1 }
@@ -273,7 +293,9 @@ Returns the accumulated value.
 
 ### `Hookah.reduceRight`
 
->Hookah.reduceRight<T,E where T:CollectionType>(collection: T,initial: E,  @noescape combine: (E, T.Generator.Element) throws -> E) rethrows -> E
+```swift
+Hookah.reduceRight<T,E where T:CollectionType>(collection: T,initial: E,  @noescape combine: (E, T.Generator.Element) throws -> E) rethrows -> E
+```
 
 ```swift
 Hookah.reduceRight(["foo","bar","baz"], initial: "") {return "\($0)\($1)" }
@@ -293,7 +315,9 @@ Returns the accumulated value.
 
 ### `Hookah.reject`
 
->Hookah.reject<T where T:CollectionType>(collection: T,@noescape predicate: T.Generator.Element throws -> Bool) rethrows -> [T.Generator.Element]
+```swift
+Hookah.reject<T where T:CollectionType>(collection: T,@noescape predicate: T.Generator.Element throws -> Bool) rethrows -> [T.Generator.Element]
+```
 
 ```swift
 Hookah.reject([1,2,3,4,5]){ $0 % 2 == 0 }
@@ -312,10 +336,12 @@ The opposite of Hookah.filter; this method returns the elements of collection th
 #### Return ####
 
 Returns the new filtered array.
- 
+
 ### `Hookah.sample`
 
->Hookah.sample<T where T:CollectionType, T.Index == Int>(collection: T) -> T.Generator.Element
+```swift
+Hookah.sample<T where T:CollectionType, T.Index == Int>(collection: T) -> T.Generator.Element
+```
 
 ```swift
 Hookah.sample([1,2,3,4])
@@ -333,7 +359,9 @@ Return the random element.
 
 ### `Hookah.sampleSize`
 
->Hookah.sampleSize<T where T:CollectionType, T.Index == Int>(collection: T, n: Int) -> [T.Generator.Element]
+```swift
+Hookah.sampleSize<T where T:CollectionType, T.Index == Int>(collection: T, n: Int) -> [T.Generator.Element]
+```
 
 ```swift
 Hookah.sampleSize([1,2,3,4],n: 2)
@@ -355,7 +383,9 @@ Array of random elements
 
 ### `Hookah.shuffle`
 
->Hookah.shuffle<T where T:CollectionType, T.Index == Int>(collection: T) -> [T.Generator.Element]
+```swift
+Hookah.shuffle<T where T:CollectionType, T.Index == Int>(collection: T) -> [T.Generator.Element]
+```
 
 ```swift
 Hookah.shuffle([1,2,3,4])
@@ -376,7 +406,9 @@ Returns the shuffled array.
 
 ### `Hookah.size`
 
->Hookah.size<T where T:CollectionType>(collection: T) -> Int
+```swift
+Hookah.size<T where T:CollectionType>(collection: T) -> Int
+```
 
 ```swift
 Hookah.size([1,2,3,4])
@@ -396,10 +428,12 @@ Complexity: O(1) in most cases. O(n) in worst cases.
 #### Return ####
 
 The collection size.
- 
+
 ### `Hookah.some`
 
->Hookah.some<T where T:CollectionType>(collection: T,@noescape predicate: T.Generator.Element throws -> Bool) rethrows -> Bool
+```swift
+Hookah.some<T where T:CollectionType>(collection: T,@noescape predicate: T.Generator.Element throws -> Bool) rethrows -> Bool
+```
 
 ```swift
 Hookah.some([11, 10, 22]){ $0 % 2 != 0 }
@@ -416,12 +450,14 @@ Checks if predicate returns true for ANY element of collection. Iteration is sto
 #### Return ####
 
 Returns true if any element passes the predicate check, else false.
- 
+
 ## Array ##
 
 ### `Hookah.chunk`
 
->Hookah.chunk<T>(array: [T], size: Int = 0) -> [[T]]
+```swift
+Hookah.chunk<T>(array: [T], size: Int = 0) -> [[T]]
+```
 
 ```swift
 Hookah.chunk([1,2,3,4,5],size: 2)
@@ -438,10 +474,12 @@ Create an array of elements split in to groups by the length of size. If array c
 #### Return ####
 
 The new array contains chunks
- 
+
 ### `Hookah.compact`
 
->Hookah.compact<T>(array: [T?]) -> [T]
+```swift
+Hookah.compact<T>(array: [T?]) -> [T]
+```
 
 ```swift
 Hookah.compact([2,3,4,nil,6,7])
@@ -460,7 +498,9 @@ The new filtered array.
 
 ### `Hookah.concat` (values)
 
->Hookah.concat<T>(array: [T], values: T...) -> [T]
+```swift
+Hookah.concat<T>(array: [T], values: T...) -> [T]
+```
 
 ```swift
 Hookah.concat([1,2,3], values: 2, 3, 4)
@@ -480,7 +520,9 @@ The new concatenated array.
 
 ### `Hookah.concat` (arrays)
 
->Hookah.concat<T>(array: [T], arrays: [T]...) -> [T]
+```swift
+Hookah.concat<T>(array: [T], arrays: [T]...) -> [T]
+```
 
 ```swift
 Hookah.concat(array, arrays: [1,2],[3,4],[0])
@@ -498,9 +540,32 @@ Creates a new array concatenating additional arrays.
 
 The new concatenated array.
 
+### `Hookah.flatten`
+
+```swift
+Hookah.flatten<T>(array: [T]) -> [T]
+```
+
+```swift
+Hookah.flatten([1, [2, 3, [4]]] as [NSObject])
+// -> [1, 2, 3, [4]
+```
+
+Flatten array one level.
+
+#### Arguments ####
+
+- array: The array to flatten.
+
+#### Return ####
+
+The new flattened array.
+
 ### `Hookah.flattenDeep`
 
->Hookah.flattenDeep<T>(array: [T]) -> [T]
+```swift
+Hookah.flattenDeep<T>(array: [T]) -> [T]
+```
 
 ```swift
 Hookah.flattenDeep([[1],2,[3,[[4]],5],[[6,7],8],[[9]]])
@@ -517,9 +582,11 @@ This method is like Hookah.flatten except that it recursively flattens array.
 
 The new flattened array.
 
-### `Hookah.slice` 
+### `Hookah.slice`
 
->Hookah.slice<T>(array: [T], start: Int, end: Int? = nil) -> [T]
+```swift
+Hookah.slice<T>(array: [T], start: Int, end: Int? = nil) -> [T]
+```
 
 ```swift
 Hookah.slice([1,2,3,4,5], start: 0, end: 2)

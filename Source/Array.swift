@@ -103,6 +103,34 @@ extension Hookah{
     }
     
     
+    private class func _baseFlatten<T>(array: [T], isDeep:Bool = false) -> [T] {
+        var result = [T]()
+        for element in array {
+            if let val = element as? [T] {
+                if isDeep {
+                    result += _baseFlatten(val, isDeep:true)
+                } else {
+                    result += val
+                }
+            } else {
+                result.append(element)
+            }
+        }
+        
+        return result
+    }
+    
+    /**
+     Flatten array one level.
+     
+     - parameter array: The array to flatten.
+     
+     - returns: The new flattened array.
+     */
+    public class func flatten<T>(array: [T]) -> [T] {
+        return _baseFlatten(array)
+    }
+    
     /**
      This method is like Hookah.flatten except that it recursively flattens array.
      
@@ -111,16 +139,9 @@ extension Hookah{
      - returns: The new flattened array.
      */
     public class func flattenDeep<T>(array: [T]) -> [T]{
-        var result = [T]()
-        for element in array{
-            if let val = element as? [T] {
-                result += flattenDeep(val)
-            } else {
-                result.append(element)
-            }
-        }
-        return result
+        return _baseFlatten(array, isDeep:true)
     }
+    
     
     public class func difference<T where T: Equatable>(array: [T], comparedArrs: [T]...) -> [T]{
         //TODO: Come back when finish filter and contains

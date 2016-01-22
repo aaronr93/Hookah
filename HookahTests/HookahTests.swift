@@ -220,10 +220,14 @@ class HookahTests: XCTestCase {
         
     }
     
+    func testFlatten(){
+        XCTAssertEqual(Hookah.flatten([1, [2, 3, [4]]] as [NSObject]), [1, 2, 3, [4]], "Should flatten only one level")
+    }
+    
     func testFlattenDeep(){
         let arr = [1,2,3,4,5,[6,7],[8],[9]]
         XCTAssertEqual(Hookah.flattenDeep(arr), [1,2,3,4,5,6,7,8,9], "Should flatten array")
-        XCTAssertEqual(Hookah.flattenDeep([[1],2,[3,[[4]],5],[[6,7],8],[[9]]]  ), [1,2,3,4,5,6,7,8, 9], "Should deeply flatten the array")
+        XCTAssertEqual(Hookah.flattenDeep([[1],2,[3,[[4]],5],[[6,7],8],[[9]]] ), [1,2,3,4,5,6,7,8, 9], "Should deeply flatten the array")
     }
     
     func testRandom() {
