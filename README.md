@@ -790,5 +790,10 @@ Create an array by slicing the array from start up to, but not including, end.
 
 The sliced array.
 
+# Roadmap #
+
+- Finish methods for String and so on. (There is alot of work to do, guys.)
+- Add more test cases.
+
 # Contributing #
 All contributions Hookah are extremely welcome. Checkout [CONTRIBUTING.md](https://github.com/khoiln/Hookah/blob/master/CONTRIBUTING.md)
