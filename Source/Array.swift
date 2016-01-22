@@ -167,13 +167,38 @@ extension Hookah{
         return slice(array, start: 0, end: end < 0 ? 0 : end)
     }
     
-    
-    
-    public class func difference<T where T: Equatable>(array: [T], comparedArrs: [T]...) -> [T]{
-        //TODO: Come back when finish filter and contains
-        let result = [T]()
-        
-        return result
+    private class func baseWhile<T>(array: [T], predicate: T -> Bool, isDrop: Bool = false, fromRight: Bool = false) -> [T]{
+        let length = array.count
+        var index = fromRight ? length : -1
+        while (fromRight ? --index > 0 : ++index < length) && predicate(array[index]){}
+        return isDrop ? slice(array, start: fromRight ? 0 : index, end: fromRight ? index + 1 : length) : slice(array, start: fromRight ? index + 1 : 0, end: fromRight ? length : index)
     }
+    
+    /**
+     Creates a slice of array excluding elements dropped from the beginning. Elements are dropped until predicate returns false.
+     
+     - parameter array:     The array to query.
+     - parameter predicate: The function invoked per iteration.
+     
+     - returns : Returns the slice of array.
+     */
+    
+    public class func dropWhile<T>(array: [T], predicate: T -> Bool) -> [T]{
+        return baseWhile(array, predicate: predicate, isDrop: true, fromRight: false)
+    }
+    
+    /**
+     Creates a slice of array excluding elements dropped from the end. Elements are dropped until predicate returns false.
+     
+     - parameter array:     The array to query.
+     - parameter predicate: The function invoked per iteration.
+     
+     - returns : Returns the slice of array.
+     */
+    public class func dropRightWhile<T>(array: [T], predicate: T -> Bool) -> [T]{
+        return baseWhile(array, predicate: predicate, isDrop: true, fromRight: true)
+    }
+    
+    
     
 }

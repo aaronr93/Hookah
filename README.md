@@ -588,6 +588,50 @@ Creates a slice of array with n elements dropped from the end.
 
 Returns the slice of array.
 
+### `Hookah.dropRightWhile`
+
+```swift
+Hookah.dropRightWhile<T>(array: [T], predicate: T -> Bool) -> [T]
+```
+
+```swift
+Hookah.dropRightWhile([1, 2, 3, 4, 5]){$0 > 3}
+// -> [1,2,3]
+```
+
+Creates a slice of array excluding elements dropped from the end. Elements are dropped until predicate returns false.
+
+#### Arguments ####
+
+- array: The array to query.
+- predicate: The function invoked per iteration.
+
+#### Return ####
+
+Returns the slice of array.
+
+### `Hookah.dropRight`
+
+```swift
+Hookah.dropRight<T>(array: [T], predicate: T -> Bool) -> [T]
+```
+
+```swift
+Hookah.dropRight([1, 2, 3, 4, 5]){$0 < 3}
+// -> [3,4,5]
+```
+
+Creates a slice of array excluding elements dropped from the beginning. Elements are dropped until predicate returns false.
+
+#### Arguments ####
+
+- array: The array to query.
+- predicate: The function invoked per iteration.
+
+#### Return ####
+
+Returns the slice of array.
+
 ### `Hookah.flatten`
 
 ```swift
