@@ -167,7 +167,7 @@ extension Hookah{
         return slice(array, start: 0, end: end < 0 ? 0 : end)
     }
     
-    private class func baseWhile<T>(array: [T], predicate: T -> Bool, isDrop: Bool = false, fromRight: Bool = false) -> [T]{
+    private class func baseWhile<T>(array: [T], predicate: (T -> Bool), isDrop: Bool = false, fromRight: Bool = false) -> [T]{
         let length = array.count
         var index = fromRight ? length : -1
         while (fromRight ? --index > 0 : ++index < length) && predicate(array[index]){}
