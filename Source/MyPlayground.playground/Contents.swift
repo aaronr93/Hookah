@@ -3,5 +3,12 @@
 import Hookah
 
 var str = "Hello, playground"
-var a = Hookah.flatten([[1],2,[3,[[4]],5],[[6,7],8],[[9]]] )
-print(a)
+
+
+let arr1 = [1,2,3,4,5]
+let idx = arr1.indexOf(6)
+
+
+let jointer = ":"
+let elements = ["one", "two", "three"]
+
