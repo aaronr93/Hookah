@@ -481,6 +481,14 @@ extension Hookah{
         return _baseXor(arrays, isXorBy: true, comparator: ==, iteratee: iteratee)
     }
     
+    /**
+     This method is like Hookah.xor except that it accepts comparator which is invoked to compare elements of arrays.
+     
+     - parameter arrays:     The arrays to inspect.
+     - parameter comparator: The comparator invoked per element.
+     
+     - returns: Returns the new array of values.
+     */
     public class func xorWith<T>(arrays:[T]..., comparator:(T,T)->Bool) -> [T] {
         return _baseXor(arrays, isXorBy:false, comparator:comparator)
     }
