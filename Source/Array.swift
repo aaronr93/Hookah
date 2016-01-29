@@ -242,6 +242,13 @@ extension Hookah{
         return nil
     }
     
+    /**
+     Gets all but the last element of array.
+     
+     - parameter array: The array to query.
+     
+     - returns: Returns the slice of array.
+     */
     public class func initial<T>(array:[T]) -> [T] {
         return slice(array, start: 0, end: array.count-1)
     }

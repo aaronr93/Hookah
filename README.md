@@ -887,6 +887,27 @@ Gets the index at which the first occurrence of value is found in array.
 
 Returns the index of the found element, else -1.
 
+### `Hookah.initial`
+
+```swift
+Hookah.initial<T>(array:[T]) -> [T]
+```
+
+```swift
+Hookah.initial([1,2,3])
+// -> [1,2]
+```
+
+Gets all but the last element of array.
+
+#### Arguments ####
+
+- array: The array to query.
+
+#### Return ####
+
+Returns the slice of array.
+
 ### `Hookah.slice`
 
 ```swift
