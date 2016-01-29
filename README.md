@@ -540,6 +540,28 @@ Creates a new array concatenating additional arrays.
 
 The new concatenated array.
 
+### `Hookah.difference` (arrays)
+
+```swift
+Hookah.difference<T where T:Equatable>(array:[T], values:[T])-> [T]
+```
+
+```swift
+Hookah.difference([3,2,1], values:[4,2])
+// -> [3,1]
+```
+
+Creates an array of unique array values not included in the other provided arrays.
+
+#### Arguments ####
+
+- array: The array to inspect.
+- values: The values to exclude.
+
+#### Return ####
+
+Returns the new array of filtered values.
+
 ### `Hookah.drop`
 
 ```swift

@@ -31,6 +31,14 @@ extension Hookah{
         }
     }
     
+    /**
+     Creates an array of unique array values not included in the other provided arrays.
+     
+     - parameter array:  The array to inspect.
+     - parameter values: The values to exclude.
+     
+     - returns: Returns the new array of filtered values.
+     */
     public class func difference<T where T:Equatable>(array:[T], values:[T])-> [T] {
         return _baseDifference(array, values: values, comparator:==)
     }
