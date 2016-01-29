@@ -264,6 +264,14 @@ extension Hookah{
         return _baseIntersection(Array(arrays), comparator:==)
     }
     
+    /**
+     This method is like Hookah.intersection except that it accepts iteratee which is invoked for each element of each arrays to generate the criterion by which uniqueness is computed.
+     
+     - parameter arrays:   The arrays to inspect.
+     - parameter iteratee: The iteratee invoked per element.
+     
+     - returns: Returns the new array of shared values.
+     */
     public class func intersectionBy<T where T:Equatable>(arrays:[T]..., iteratee:T->T) -> [T] {
         return _baseIntersection(Array(arrays), comparator:==, iteratee:iteratee)
     }

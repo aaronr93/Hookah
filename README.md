@@ -929,6 +929,28 @@ Creates an array of unique values that are included in all of the provided array
 
 Returns the new array of shared values.
 
+### `Hookah.intersectionBy`
+
+```swift
+Hookah.intersectionBy<T where T:Equatable>(arrays:[T]..., iteratee:T->T) -> [T]
+```
+
+```swift
+Hookah.intersectionBy([2.1, 1.2], [4.3, 2.4], iteratee:floor)
+// -> [2.1]
+```
+
+This method is like Hookah.intersection except that it accepts iteratee which is invoked for each element of each arrays to generate the criterion by which uniqueness is computed.
+
+#### Arguments ####
+
+- array: The arrays to inspect.
+- iteratee: The iteratee invoked per element.
+
+#### Return ####
+
+Returns the new array of shared values.
+
 ### `Hookah.slice`
 
 ```swift
