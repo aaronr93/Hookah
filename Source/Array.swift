@@ -221,6 +221,16 @@ extension Hookah{
         return _baseFlatten(array, isDeep:true)
     }
     
+    /**
+     Gets the index at which the first occurrence of value is found in array.
+     
+     - parameter array:     The array to search.
+     - parameter value:     The value to search for.
+     - parameter fromIndex: The index to search from. `nil` by default
+     
+     - returns:  Returns the index of the matched value, else `nil`.
+     */
+    //TODO: If the array is sorted using binary search instead
     public class func indexOf<T where T:Equatable>(array:[T], value:T, fromIndex:UInt?=nil) -> Int? {
         let fromIdx = fromIndex ?? 0
         guard Int(fromIdx) < array.count else {return nil}

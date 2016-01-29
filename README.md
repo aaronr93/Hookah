@@ -864,6 +864,29 @@ This method is like Hookah.findIndex except that it iterates over elements of ar
 
 Returns the index of the found element, else -1.
 
+### `Hookah.indexOf`
+
+```swift
+Hookah.indexOf<T where T:Equatable>(array:[T], value:T, fromIndex:UInt?=nil) -> Int?
+```
+
+```swift
+Hookah.indexOf([1,2,1,2], value:2)
+// -> 1 // index of first `2`
+```
+
+Gets the index at which the first occurrence of value is found in array.
+
+#### Arguments ####
+
+- array: The array to search.
+- value: The value to search for.
+- fromIndex: The index to search from. `nil` by default
+
+#### Return ####
+
+Returns the index of the found element, else -1.
+
 ### `Hookah.slice`
 
 ```swift
