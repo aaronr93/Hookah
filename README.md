@@ -540,6 +540,80 @@ Creates a new array concatenating additional arrays.
 
 The new concatenated array.
 
+### `Hookah.difference` 
+
+```swift
+Hookah.difference<T where T:Equatable>(array:[T], values:[T])-> [T]
+```
+
+```swift
+Hookah.difference([3,2,1], values:[4,2])
+// -> [3,1]
+```
+
+Creates an array of unique array values not included in the other provided arrays.
+
+#### Arguments ####
+
+- array: The array to inspect.
+- values: The values to exclude.
+
+#### Return ####
+
+Returns the new array of filtered values.
+
+### `Hookah.differenceBy` 
+
+```swift
+Hookah.differenceBy<T where T:Equatable>(array:[T], values:[T], iteratee:(T->T)) -> [T]
+```
+
+```swift
+Hookah.differenceBy([3.1, 2.2, 1.3], values: [4.4, 2.5], iteratee: floor)
+// -> [3.1, 1.3]
+```
+
+This method is like Hookah.difference except that it accepts iteratee which is invoked for each element of array and values to generate the criterion by which uniqueness is computed.
+
+#### Arguments ####
+
+- array: The array to inspect.
+- values: The values to exclude.
+- iteratee: The iteratee invoked per element.
+
+#### Return ####
+
+Returns the new array of filtered values.
+
+### `Hookah.differenceWith` 
+
+```swift
+Hookah.differenceWith<T>(array:[T], values:[T], comparator:((T,T)->Bool)) -> [T]
+```
+
+```swift
+func compare(obj1:[String:Int], obj2:[String:Int]) -> Bool {
+    if obj1["x"] == obj2["x"] && obj1["y"] == obj2["y"] {
+        return true
+    }
+    return false;
+}
+Hookah.differenceWith([["x":1,"y":2], ["x":2, "y":1]], values: [["x":1, "y":2]], comparator: compare)
+// -> [["x":2, "y":1]]
+```
+
+This method is like Hookah.difference except that it accepts comparator which is invoked to compare elements of array to values.
+
+#### Arguments ####
+
+- array: The array to inspect.
+- values: The values to exclude.
+- comparator: The comparator invoked per element.
+
+#### Return ####
+
+Returns the new array of filtered values.
+
 ### `Hookah.drop`
 
 ```swift
@@ -631,6 +705,31 @@ Creates a slice of array excluding elements dropped from the beginning. Elements
 #### Return ####
 
 Returns the slice of array.
+
+### `Hookah.flatMap`
+
+```swift
+Hookah.flatMap<T>(array:[T], iteratee:T->[T]) -> [T]
+```
+
+```swift
+func duplicate(num:Int) -> [Int] {
+    return [num, num]
+}
+Hookah.flatMap([1,2], iteratee:duplicate)
+// -> [1,1,2,2]
+```
+
+Creates an array of flattened values by running each element in array through iteratee and concating its result to the other mapped values.
+
+#### Arguments ####
+
+- array: The array to iterate over.
+- iteratee: The function invoked per iteration.
+
+#### Return ####
+
+Returns the new array.
 
 ### `Hookah.flatten`
 
@@ -765,6 +864,123 @@ This method is like Hookah.findIndex except that it iterates over elements of ar
 
 Returns the index of the found element, else -1.
 
+### `Hookah.indexOf`
+
+```swift
+Hookah.indexOf<T where T:Equatable>(array:[T], value:T, fromIndex:UInt?=nil) -> Int?
+```
+
+```swift
+Hookah.indexOf([1,2,1,2], value:2)
+// -> 1 // index of first `2`
+```
+
+Gets the index at which the first occurrence of value is found in array.
+
+#### Arguments ####
+
+- array: The array to search.
+- value: The value to search for.
+- fromIndex: The index to search from. `nil` by default
+
+#### Return ####
+
+Returns the index of the found element, else -1.
+
+### `Hookah.initial`
+
+```swift
+Hookah.initial<T>(array:[T]) -> [T]
+```
+
+```swift
+Hookah.initial([1,2,3])
+// -> [1,2]
+```
+
+Gets all but the last element of array.
+
+#### Arguments ####
+
+- array: The array to query.
+
+#### Return ####
+
+Returns the slice of array.
+
+### `Hookah.intersection`
+
+```swift
+Hookah.intersection<T where T:Equatable>(arrays:[T]...) -> [T]
+```
+
+```swift
+Hookah.intersection([2,1], [4,2], [1,2])
+// -> [2]
+```
+
+Creates an array of unique values that are included in all of the provided arrays.
+
+#### Arguments ####
+
+- array: The arrays to inspect.
+
+#### Return ####
+
+Returns the new array of shared values.
+
+### `Hookah.intersectionBy`
+
+```swift
+Hookah.intersectionBy<T where T:Equatable>(arrays:[T]..., iteratee:T->T) -> [T]
+```
+
+```swift
+Hookah.intersectionBy([2.1, 1.2], [4.3, 2.4], iteratee:floor)
+// -> [2.1]
+```
+
+This method is like Hookah.intersection except that it accepts iteratee which is invoked for each element of each arrays to generate the criterion by which uniqueness is computed.
+
+#### Arguments ####
+
+- array: The arrays to inspect.
+- iteratee: The iteratee invoked per element.
+
+#### Return ####
+
+Returns the new array of shared values.
+
+### `Hookah.intersectionWith`
+
+```swift
+Hookah.intersectionWith<T>(arrays:[T]..., comparator:(T,T)->Bool) -> [T] 
+```
+
+```swift
+func compare(obj1:[String:Int], obj2:[String:Int]) -> Bool {
+    if obj1["x"] == obj2["x"] && obj1["y"] == obj2["y"] {
+        return true
+    }
+    return false;
+}
+let a1 = [["x":1, "y":2], ["x":2, "y":1]]
+let a2 = [["x":1, "y":1], ["x":1, "y":2]]
+Hookah.intersectionWith(a1, a2, comparator: compare)
+// -> [["x":1, "y":2]]
+```
+
+This method is like Hookah.intersection except that it accepts comparator which is invoked to compare elements of arrays.
+
+#### Arguments ####
+
+- array: The arrays to inspect.
+- comparator: The comparator invoked per element.
+
+#### Return ####
+
+Returns the new array of shared values.
+
 ### `Hookah.slice`
 
 ```swift
@@ -789,6 +1005,79 @@ Create an array by slicing the array from start up to, but not including, end.
 #### Return ####
 
 The sliced array.
+
+### `Hookah.xor`
+
+```swift
+Hookah.xor<T where T:Equatable>(arrays:[T]...) -> [T]
+```
+
+```swift
+Hookah.xor([2,1], [4,2])
+// -> [1,4]
+```
+
+Creates an array of unique values that is the symmetric difference of the provided arrays.
+
+#### Arguments ####
+
+- arrays: The arrays to inspect.
+
+#### Return ####
+
+Returns the new array of values.
+
+### `Hookah.xorBy`
+
+```swift
+Hookah.xorBy<T where T:Equatable>(arrays:[T]..., iteratee:(T->T)) -> [T]
+```
+
+```swift
+Hookah.xorBy([2.1, 1.2], [4.3, 2.4], iteratee: floor)
+// -> [1.2, 4.3]
+```
+
+This method is like Hookah.xor except that it accepts iteratee which is invoked for each element of each arrays to generate the criterion by which uniqueness is computed.
+
+#### Arguments ####
+
+- arrays: The arrays to inspect.
+- iteratee: The iteratee invoked per element.
+
+#### Return ####
+
+Returns the new array of values.
+
+### `Hookah.xorWith`
+
+```swift
+Hookah.xorWith<T>(arrays:[T]..., comparator:(T,T)->Bool) -> [T]
+```
+
+```swift
+func compare(obj1:[String:Int], obj2:[String:Int]) -> Bool {
+    if obj1["x"] == obj2["x"] && obj1["y"] == obj2["y"] {
+        return true
+    }
+    return false;
+}
+let a1 = [["x":1, "y":2], ["x":2, "y":1]]
+let a2 = [["x":1, "y":1], ["x":1, "y":2]]
+Hookah.xorWith(a1, a2, comparator: compare)
+// -> [["x":2,"y":1],["x":1,"y":1]]
+```
+
+This method is like Hookah.xor except that it accepts comparator which is invoked to compare elements of arrays.
+
+#### Arguments ####
+
+- arrays: The arrays to inspect.
+- iteratee: The iteratee invoked per element.
+
+#### Return ####
+
+Returns the new array of values.
 
 # Roadmap #
 

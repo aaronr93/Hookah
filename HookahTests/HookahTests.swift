@@ -310,5 +310,78 @@ class HookahTests: XCTestCase {
         XCTAssertEqual(Hookah.random(lower:2,upper:2), 2, "Should return 2")
     }
     
+    func testXor() {
+        XCTAssertEqual(Hookah.xor([2,1], [4,2]), [1,4], "")
+        XCTAssertEqual(Hookah.xor([Int]()), [], "")
+    }
     
+    func testXorBy() {
+        XCTAssertEqual(Hookah.xorBy([2.1, 1.2], [4.3, 2.4], iteratee: floor), [1.2, 4.3], "")
+    }
+    
+    func compare(obj1:[String:Int], obj2:[String:Int]) -> Bool {
+        if obj1["x"] == obj2["x"] && obj1["y"] == obj2["y"] {
+            return true
+        }
+        
+        return false;
+    }
+    
+    func testXorWith() {
+        let objects1 = [["x":1, "y":2], ["x":2, "y":1]]
+        let objects2 = [["x":1, "y":1], ["x":1, "y":2]]
+        
+        XCTAssertEqual(Hookah.xorWith(objects1, objects2, comparator: compare), [["x":2,"y":1],["x":1,"y":1]], "")
+    }
+    
+    func testDifference() {
+        XCTAssertEqual(Hookah.difference([3,2,1], values:[4,2]), [3,1], "")
+    }
+    
+    func testDifferenceBy() {
+        XCTAssertEqual(Hookah.differenceBy([3.1, 2.2, 1.3], values: [4.4, 2.5], iteratee: floor), [3.1, 1.3], "")
+    }
+    
+    func testDifferenceWith() {
+        XCTAssertEqual(Hookah.differenceWith([["x":1,"y":2], ["x":2, "y":1]], values: [["x":1, "y":2]], comparator: compare), [["x":2, "y":1]])
+    }
+    
+    func duplicate(num:Int) -> [Int] {
+        return [num, num]
+    }
+    
+
+    func testFlatMap() {
+        XCTAssertEqual(Hookah.flatMap([1,2], iteratee:duplicate), [1,1,2,2], "")
+    }
+    
+    func testIndexOf() {
+        XCTAssertEqual(Hookah.indexOf([1,2,1,2], value:2), 1, "")
+        XCTAssertEqual(Hookah.indexOf([1,2,1,2], value:2, fromIndex:2), 3, "")
+        XCTAssertEqual(Hookah.indexOf([1,2,1,2], value:3), nil, "")
+        XCTAssertEqual(Hookah.indexOf([1,2,1,2], value:3, fromIndex:10), nil, "")
+    }
+    
+    func testInitial() {
+        XCTAssertEqual(Hookah.initial([1]), [], "")
+        XCTAssertEqual(Hookah.initial([Int]()), [], "")
+        XCTAssertEqual(Hookah.initial([1,2,3]), [1,2], "")
+    }
+    
+    func testIntersection() {
+        XCTAssertEqual(Hookah.intersection([2,1], [4,2], [1,2]), [2], "")
+        XCTAssertEqual(Hookah.intersection([1]), [1], "")
+        XCTAssertEqual(Hookah.intersection([Int]()), [], "")
+    }
+    
+    func testIntersectionBy() {
+        XCTAssertEqual(Hookah.intersectionBy([2.1, 1.2], [4.3, 2.4], iteratee:floor), [2.1], "")
+    }
+    
+    func testIntersectionWith() {
+        let objects1 = [["x":1, "y":2], ["x":2, "y":1]]
+        let objects2 = [["x":1, "y":1], ["x":1, "y":2]]
+        
+        XCTAssertEqual(Hookah.intersectionWith(objects1, objects2, comparator: compare), [["x":1, "y":2]], "")
+    }
 }

@@ -31,6 +31,67 @@ extension Hookah{
         }
     }
     
+    /**
+     Creates an array of unique array values not included in the other provided arrays.
+     
+     - parameter array:  The array to inspect.
+     - parameter values: The values to exclude.
+     
+     - returns: Returns the new array of filtered values.
+     */
+    public class func difference<T where T:Equatable>(array:[T], values:[T])-> [T] {
+        return _baseDifference(array, values: values, comparator:==)
+    }
+    
+    /**
+     This method is like Hookah.difference except that it accepts iteratee which is invoked for each element of array and values to generate the criterion by which uniqueness is computed.
+     
+     - parameter array:    The array to inspect.
+     - parameter values:   The values to exclude.
+     - parameter iteratee: The iteratee invoked per element.
+     
+     - returns: Returns the new array of filtered values.
+     */
+    public class func differenceBy<T where T:Equatable>(array:[T], values:[T], iteratee:(T->T)) -> [T] {
+        return _baseDifference(array, values: values, comparator:==, iteratee:iteratee)
+    }
+    
+    /**
+     This method is like Hookah.difference except that it accepts comparator which is invoked to compare elements of array to values.
+     
+     - parameter array:      The array to inspect.
+     - parameter values:     The values to exclude.
+     - parameter comparator: The comparator invoked per element.
+     
+     - returns: Returns the new array of filtered values.
+     */
+    public class func differenceWith<T>(array:[T], values:[T], comparator:((T,T)->Bool)) -> [T] {
+        return _baseDifference(array, values: values, comparator: comparator)
+    }
+    
+    private class func _baseDifference<T>(array:[T], values:[T], comparator:((T,T)->Bool), iteratee:(T->T)?=nil) -> [T] {
+        var result = [T]()
+        for elem1 in array {
+            var isUnique = true
+            let val1 = iteratee != nil ? iteratee!(elem1) : elem1
+            
+            for elem2 in values {
+                let val2 = iteratee != nil ? iteratee!(elem2) : elem2
+
+                if comparator(val1, val2) {
+                    isUnique = false
+                    break
+                }
+            }
+            
+            if isUnique {
+                result.append(elem1)
+            }
+        }
+        
+        return result
+    }
+    
     
     /**
      Create an array with all nil values removed.
@@ -120,6 +181,24 @@ extension Hookah{
         return result
     }
     
+    
+    /**
+     Creates an array of flattened values by running each element in array through iteratee and concating its result to the other mapped values.
+     
+     - parameter array:    The array to iterate over.
+     - parameter iteratee: The function invoked per iteration.
+     
+     - returns: Returns the new array.
+     */
+    public class func flatMap<T>(array:[T], iteratee:T->[T]) -> [T] {
+        var result = [T]()
+        for elem in array {
+            result.appendContentsOf(iteratee(elem))
+        }
+        
+        return result
+    }
+    
     /**
      Flatten array one level.
      
@@ -140,6 +219,111 @@ extension Hookah{
      */
     public class func flattenDeep<T>(array: [T]) -> [T]{
         return _baseFlatten(array, isDeep:true)
+    }
+    
+    /**
+     Gets the index at which the first occurrence of value is found in array.
+     
+     - parameter array:     The array to search.
+     - parameter value:     The value to search for.
+     - parameter fromIndex: The index to search from. `nil` by default
+     
+     - returns:  Returns the index of the matched value, else `nil`.
+     */
+    //TODO: If the array is sorted using binary search instead
+    public class func indexOf<T where T:Equatable>(array:[T], value:T, fromIndex:UInt?=nil) -> Int? {
+        let fromIdx = fromIndex ?? 0
+        guard Int(fromIdx) < array.count else {return nil}
+        for i in Int(fromIdx)..<array.count {
+            if array[i] == value {
+                return i
+            }
+        }
+        return nil
+    }
+    
+    /**
+     Gets all but the last element of array.
+     
+     - parameter array: The array to query.
+     
+     - returns: Returns the slice of array.
+     */
+    public class func initial<T>(array:[T]) -> [T] {
+        return slice(array, start: 0, end: array.count-1)
+    }
+    
+    /**
+     Creates an array of unique values that are included in all of the provided arrays.
+     
+     - parameter arrays: The arrays to inspect.
+     
+     - returns: Returns the new array of shared values.
+     */
+    public class func intersection<T where T:Equatable>(arrays:[T]...) -> [T] {
+        return _baseIntersection(Array(arrays), comparator:==)
+    }
+    
+    /**
+     This method is like Hookah.intersection except that it accepts iteratee which is invoked for each element of each arrays to generate the criterion by which uniqueness is computed.
+     
+     - parameter arrays:   The arrays to inspect.
+     - parameter iteratee: The iteratee invoked per element.
+     
+     - returns: Returns the new array of shared values.
+     */
+    public class func intersectionBy<T where T:Equatable>(arrays:[T]..., iteratee:T->T) -> [T] {
+        return _baseIntersection(Array(arrays), comparator:==, iteratee:iteratee)
+    }
+    
+    /**
+     This method is like Hookah.intersection except that it accepts comparator which is invoked to compare elements of arrays.
+     
+     - parameter arrays:     The arrays to inspect.
+     - parameter comparator: The comparator invoked per element.
+     
+     - returns: Returns the new array of shared values.
+     */
+    public class func intersectionWith<T>(arrays:[T]..., comparator:(T,T)->Bool) -> [T] {
+        return _baseIntersection(Array(arrays), comparator: comparator)
+    }
+    
+    public class func join(array:[String], separator:String=",") -> String {
+//        Hookah.reduce(array.enumerate(), initial: <#T##E#>, combine: <#T##(E, T.Generator.Element) throws -> E#>)
+//        return array.reduce("", combine: {$0 + $1.element})
+
+        
+//        return Hookah.reduce(array.enumerate(), initial: "", combine: {$0 + $1.element + ($1.index < array.endIndex-1 ? separator : "")})
+        // TODO:
+        return ""
+    }
+    
+    public class func _baseIntersection<T>(arrays:[[T]], comparator:(T,T)->Bool, iteratee:(T->T)?=nil) -> [T] {
+        guard arrays.count > 0 else {return []}
+        guard arrays.count > 1 else {return arrays[0]}
+        
+        var result = arrays[0]
+        for i in 1..<arrays.count {
+            var tmp = [T]()
+            for elem1 in result {
+                var isCommonElem = false
+                let val1 = iteratee != nil ? iteratee!(elem1) : elem1
+                for elem2 in arrays[i] {
+                    let val2 = iteratee != nil ? iteratee!(elem2) : elem2
+                    if comparator(val1, val2) {
+                        isCommonElem = true
+                        break
+                    }
+                }
+                if isCommonElem {
+                    tmp.append(elem1)
+                }
+            }
+            result = tmp
+            if result.count == 0 {break}
+        }
+        
+        return result
     }
     
     /**
@@ -266,5 +450,98 @@ extension Hookah{
      */
     public class func findLastIndex<T>(array: [T], predicate: T -> Bool) -> Int{
         return baseFindIndex(array, fromRight: true, predicate: predicate)
+    }
+    
+    enum XorType {
+        case Normal
+        case By
+        case With
+    }
+    
+    /**
+     Creates an array of unique values that is the symmetric difference of the provided arrays.
+     
+     - parameter arrays: The arrays to inspect.
+     
+     - returns: Returns the new array of values.
+     */
+    public class func xor<T where T:Equatable>(arrays:[T]...) -> [T] {
+        return _baseXor(arrays, isXorBy: false, comparator:==)
+    }
+
+    /**
+     This method is like Hookah.xor except that it accepts iteratee which is invoked for each element of each arrays to generate the criterion by which uniqueness is computed.
+     
+     - parameter arrays:   The arrays to inspect.
+     - parameter iteratee: The iteratee invoked per element.
+     
+     - returns: Returns the new array of values.
+     */
+    public class func xorBy<T where T:Equatable>(arrays:[T]..., iteratee:(T->T)) -> [T] {
+        return _baseXor(arrays, isXorBy: true, comparator: ==, iteratee: iteratee)
+    }
+    
+    /**
+     This method is like Hookah.xor except that it accepts comparator which is invoked to compare elements of arrays.
+     
+     - parameter arrays:     The arrays to inspect.
+     - parameter comparator: The comparator invoked per element.
+     
+     - returns: Returns the new array of values.
+     */
+    public class func xorWith<T>(arrays:[T]..., comparator:(T,T)->Bool) -> [T] {
+        return _baseXor(arrays, isXorBy:false, comparator:comparator)
+    }
+    
+    private class func _baseXor<T>(arrays:[[T]], isXorBy:Bool, comparator:(T,T)->Bool, iteratee:(T->T)?=nil) -> [T] {
+        guard arrays.count > 0 else {return []}
+        guard arrays.count > 1 else {return arrays[0]}
+        
+        var result = arrays[arrays.count-1]
+        
+        for i in (0...arrays.count-2).reverse() {
+            let nextArr = arrays[i]
+            print(nextArr)
+            var tmp = [T]()
+            var uniqueElemMarker = [Bool](count: result.count, repeatedValue: true)
+            
+            for elem1 in nextArr {
+                var isUnique = true
+                for j in 0..<result.count {
+                    let elem2 = result[j]
+                    if isXorBy {
+                        if let iteratee = iteratee {
+                            if comparator(iteratee(elem1), iteratee(elem2)) {
+                                isUnique = false
+                                uniqueElemMarker[j] = false
+                                break
+                            } else {
+                                continue
+                            }
+                        }
+                    }
+                    
+                    if comparator(elem1, elem2) {
+                        isUnique = false
+                        uniqueElemMarker[j] = false
+                        break
+                    }
+                }
+                
+                if isUnique {
+                    tmp.append(elem1)
+                }
+            }
+            
+            for i in 0..<result.count {
+                if uniqueElemMarker[i] {
+                    tmp.append(result[i])
+                }
+            }
+            
+            result = tmp
+        }
+        
+        return result
     }
 }
