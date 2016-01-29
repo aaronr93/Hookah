@@ -908,6 +908,27 @@ Gets all but the last element of array.
 
 Returns the slice of array.
 
+### `Hookah.intersection`
+
+```swift
+Hookah.intersection<T where T:Equatable>(arrays:[T]...) -> [T]
+```
+
+```swift
+Hookah.intersection([2,1], [4,2], [1,2])
+// -> [2]
+```
+
+Creates an array of unique values that are included in all of the provided arrays.
+
+#### Arguments ####
+
+- array: The arrays to inspect.
+
+#### Return ####
+
+Returns the new array of shared values.
+
 ### `Hookah.slice`
 
 ```swift

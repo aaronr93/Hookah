@@ -253,6 +253,13 @@ extension Hookah{
         return slice(array, start: 0, end: array.count-1)
     }
     
+    /**
+     Creates an array of unique values that are included in all of the provided arrays.
+     
+     - parameter arrays: The arrays to inspect.
+     
+     - returns: Returns the new array of shared values.
+     */
     public class func intersection<T where T:Equatable>(arrays:[T]...) -> [T] {
         return _baseIntersection(Array(arrays), comparator:==)
     }
