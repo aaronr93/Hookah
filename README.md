@@ -951,6 +951,36 @@ This method is like Hookah.intersection except that it accepts iteratee which is
 
 Returns the new array of shared values.
 
+### `Hookah.intersectionWith`
+
+```swift
+Hookah.intersectionWith<T>(arrays:[T]..., comparator:(T,T)->Bool) -> [T] 
+```
+
+```swift
+func compare(obj1:[String:Int], obj2:[String:Int]) -> Bool {
+    if obj1["x"] == obj2["x"] && obj1["y"] == obj2["y"] {
+        return true
+    }
+    return false;
+}
+let a1 = [["x":1, "y":2], ["x":2, "y":1]]
+let a2 = [["x":1, "y":1], ["x":1, "y":2]]
+Hookah.intersectionWith(a1, a2, comparator: compare)
+// -> [["x":1, "y":2]]
+```
+
+This method is like Hookah.intersection except that it accepts comparator which is invoked to compare elements of arrays.
+
+#### Arguments ####
+
+- array: The arrays to inspect.
+- comparator: The comparator invoked per element.
+
+#### Return ####
+
+Returns the new array of shared values.
+
 ### `Hookah.slice`
 
 ```swift

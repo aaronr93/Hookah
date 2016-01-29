@@ -276,6 +276,14 @@ extension Hookah{
         return _baseIntersection(Array(arrays), comparator:==, iteratee:iteratee)
     }
     
+    /**
+     This method is like Hookah.intersection except that it accepts comparator which is invoked to compare elements of arrays.
+     
+     - parameter arrays:     The arrays to inspect.
+     - parameter comparator: The comparator invoked per element.
+     
+     - returns: Returns the new array of shared values.
+     */
     public class func intersectionWith<T>(arrays:[T]..., comparator:(T,T)->Bool) -> [T] {
         return _baseIntersection(Array(arrays), comparator: comparator)
     }
