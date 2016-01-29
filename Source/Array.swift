@@ -458,6 +458,13 @@ extension Hookah{
         case With
     }
     
+    /**
+     Creates an array of unique values that is the symmetric difference of the provided arrays.
+     
+     - parameter arrays: The arrays to inspect.
+     
+     - returns: Returns the new array of values.
+     */
     public class func xor<T where T:Equatable>(arrays:[T]...) -> [T] {
         return _baseXor(arrays, isXorBy: false, comparator:==)
     }

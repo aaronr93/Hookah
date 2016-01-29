@@ -1006,6 +1006,27 @@ Create an array by slicing the array from start up to, but not including, end.
 
 The sliced array.
 
+### `Hookah.xor`
+
+```swift
+Hookah.xor<T where T:Equatable>(arrays:[T]...) -> [T]
+```
+
+```swift
+Hookah.xor([2,1], [4,2])
+// -> [1,4]
+```
+
+Creates an array of unique values that is the symmetric difference of the provided arrays.
+
+#### Arguments ####
+
+- arrays: The arrays to inspect.
+
+#### Return ####
+
+Returns the new array of values.
+
 # Roadmap #
 
 - Finish methods for String and so on. (There is alot of work to do, guys.)
