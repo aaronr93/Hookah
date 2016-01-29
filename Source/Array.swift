@@ -181,6 +181,15 @@ extension Hookah{
         return result
     }
     
+    
+    /**
+     Creates an array of flattened values by running each element in array through iteratee and concating its result to the other mapped values.
+     
+     - parameter array:    The array to iterate over.
+     - parameter iteratee: The function invoked per iteration.
+     
+     - returns: Returns the new array.
+     */
     public class func flatMap<T>(array:[T], iteratee:T->[T]) -> [T] {
         var result = [T]()
         for elem in array {

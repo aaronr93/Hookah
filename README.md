@@ -706,6 +706,31 @@ Creates a slice of array excluding elements dropped from the beginning. Elements
 
 Returns the slice of array.
 
+### `Hookah.flatMap`
+
+```swift
+Hookah.flatMap<T>(array:[T], iteratee:T->[T]) -> [T]
+```
+
+```swift
+func duplicate(num:Int) -> [Int] {
+    return [num, num]
+}
+Hookah.flatMap([1,2], iteratee:duplicate)
+// -> [1,1,2,2]
+```
+
+Creates an array of flattened values by running each element in array through iteratee and concating its result to the other mapped values.
+
+#### Arguments ####
+
+- array: The array to iterate over.
+- iteratee: The function invoked per iteration.
+
+#### Return ####
+
+Returns the new array.
+
 ### `Hookah.flatten`
 
 ```swift
