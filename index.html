@@ -543,6 +543,74 @@
 
 <p>The new concatenated array.</p>
 
+<h3 id="hookah-difference"><code class="prettyprint">Hookah.difference</code></h3>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">difference</span><span class="o">&lt;</span><span class="kt">T</span> <span class="k">where</span> <span class="kt">T</span><span class="p">:</span><span class="kt">Equatable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">array</span><span class="p">:[</span><span class="kt">T</span><span class="p">],</span> <span class="nv">values</span><span class="p">:[</span><span class="kt">T</span><span class="p">])</span><span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="nf">difference</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="nv">values</span><span class="p">:[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="c1">// -&gt; [3,1]</span>
+</code></pre>
+
+<p>Creates an array of unique array values not included in the other provided arrays.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<ul>
+<li>array: The array to inspect.</li>
+<li>values: The values to exclude.</li>
+</ul>
+
+<h4 id="return">Return</h4>
+
+<p>Returns the new array of filtered values.</p>
+
+<h3 id="hookah-differenceby"><code class="prettyprint">Hookah.differenceBy</code></h3>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">differenceBy</span><span class="o">&lt;</span><span class="kt">T</span> <span class="k">where</span> <span class="kt">T</span><span class="p">:</span><span class="kt">Equatable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">array</span><span class="p">:[</span><span class="kt">T</span><span class="p">],</span> <span class="nv">values</span><span class="p">:[</span><span class="kt">T</span><span class="p">],</span> <span class="nv">iteratee</span><span class="p">:(</span><span class="kt">T</span><span class="o">-&gt;</span><span class="kt">T</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="nf">differenceBy</span><span class="p">([</span><span class="mf">3.1</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">],</span> <span class="nv">values</span><span class="p">:</span> <span class="p">[</span><span class="mf">4.4</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">],</span> <span class="nv">iteratee</span><span class="p">:</span> <span class="n">floor</span><span class="p">)</span>
+<span class="c1">// -&gt; [3.1, 1.3]</span>
+</code></pre>
+
+<p>This method is like Hookah.difference except that it accepts iteratee which is invoked for each element of array and values to generate the criterion by which uniqueness is computed.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<ul>
+<li>array: The array to inspect.</li>
+<li>values: The values to exclude.</li>
+<li>iteratee: The iteratee invoked per element.</li>
+</ul>
+
+<h4 id="return">Return</h4>
+
+<p>Returns the new array of filtered values.</p>
+
+<h3 id="hookah-differencewith"><code class="prettyprint">Hookah.differenceWith</code></h3>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">differenceWith</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">array</span><span class="p">:[</span><span class="kt">T</span><span class="p">],</span> <span class="nv">values</span><span class="p">:[</span><span class="kt">T</span><span class="p">],</span> <span class="nv">comparator</span><span class="p">:((</span><span class="kt">T</span><span class="p">,</span><span class="kt">T</span><span class="p">)</span><span class="o">-&gt;</span><span class="kt">Bool</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">compare</span><span class="p">(</span><span class="nv">obj1</span><span class="p">:[</span><span class="kt">String</span><span class="p">:</span><span class="kt">Int</span><span class="p">],</span> <span class="nv">obj2</span><span class="p">:[</span><span class="kt">String</span><span class="p">:</span><span class="kt">Int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="n">obj1</span><span class="p">[</span><span class="s">"x"</span><span class="p">]</span> <span class="o">==</span> <span class="n">obj2</span><span class="p">[</span><span class="s">"x"</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">obj1</span><span class="p">[</span><span class="s">"y"</span><span class="p">]</span> <span class="o">==</span> <span class="n">obj2</span><span class="p">[</span><span class="s">"y"</span><span class="p">]</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">true</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">Hookah</span><span class="o">.</span><span class="nf">differenceWith</span><span class="p">([[</span><span class="s">"x"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s">"y"</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="s">"x"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s">"y"</span><span class="p">:</span><span class="mi">1</span><span class="p">]],</span> <span class="nv">values</span><span class="p">:</span> <span class="p">[[</span><span class="s">"x"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"y"</span><span class="p">:</span><span class="mi">2</span><span class="p">]],</span> <span class="nv">comparator</span><span class="p">:</span> <span class="n">compare</span><span class="p">)</span>
+<span class="c1">// -&gt; [["x":2, "y":1]]</span>
+</code></pre>
+
+<p>This method is like Hookah.difference except that it accepts comparator which is invoked to compare elements of array to values.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<ul>
+<li>array: The array to inspect.</li>
+<li>values: The values to exclude.</li>
+<li>comparator: The comparator invoked per element.</li>
+</ul>
+
+<h4 id="return">Return</h4>
+
+<p>Returns the new array of filtered values.</p>
+
 <h3 id="hookah-drop"><code class="prettyprint">Hookah.drop</code></h3>
 <pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">drop</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">array</span><span class="p">:</span> <span class="p">[</span><span class="kt">T</span><span class="p">],</span> <span class="nv">n</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span>
 </code></pre>
@@ -626,6 +694,29 @@
 <h4 id="return">Return</h4>
 
 <p>Returns the slice of array.</p>
+
+<h3 id="hookah-flatmap"><code class="prettyprint">Hookah.flatMap</code></h3>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">flatMap</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">array</span><span class="p">:[</span><span class="kt">T</span><span class="p">],</span> <span class="nv">iteratee</span><span class="p">:</span><span class="kt">T</span><span class="o">-&gt;</span><span class="p">[</span><span class="kt">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">duplicate</span><span class="p">(</span><span class="nv">num</span><span class="p">:</span><span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">num</span><span class="p">,</span> <span class="n">num</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="kt">Hookah</span><span class="o">.</span><span class="nf">flatMap</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="nv">iteratee</span><span class="p">:</span><span class="n">duplicate</span><span class="p">)</span>
+<span class="c1">// -&gt; [1,1,2,2]</span>
+</code></pre>
+
+<p>Creates an array of flattened values by running each element in array through iteratee and concating its result to the other mapped values.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<ul>
+<li>array: The array to iterate over.</li>
+<li>iteratee: The function invoked per iteration.</li>
+</ul>
+
+<h4 id="return">Return</h4>
+
+<p>Returns the new array.</p>
 
 <h3 id="hookah-flatten"><code class="prettyprint">Hookah.flatten</code></h3>
 <pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">flatten</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">array</span><span class="p">:</span> <span class="p">[</span><span class="kt">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span>
@@ -748,6 +839,113 @@
 
 <p>Returns the index of the found element, else -1.</p>
 
+<h3 id="hookah-indexof"><code class="prettyprint">Hookah.indexOf</code></h3>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">indexOf</span><span class="o">&lt;</span><span class="kt">T</span> <span class="k">where</span> <span class="kt">T</span><span class="p">:</span><span class="kt">Equatable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">array</span><span class="p">:[</span><span class="kt">T</span><span class="p">],</span> <span class="nv">value</span><span class="p">:</span><span class="kt">T</span><span class="p">,</span> <span class="nv">fromIndex</span><span class="p">:</span><span class="kt">UInt</span><span class="p">?</span><span class="o">=</span><span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span><span class="p">?</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="nf">indexOf</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="nv">value</span><span class="p">:</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1">// -&gt; 1 // index of first `2`</span>
+</code></pre>
+
+<p>Gets the index at which the first occurrence of value is found in array.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<ul>
+<li>array: The array to search.</li>
+<li>value: The value to search for.</li>
+<li>fromIndex: The index to search from. <code class="prettyprint">nil</code> by default</li>
+</ul>
+
+<h4 id="return">Return</h4>
+
+<p>Returns the index of the found element, else -1.</p>
+
+<h3 id="hookah-initial"><code class="prettyprint">Hookah.initial</code></h3>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">initial</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">array</span><span class="p">:[</span><span class="kt">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="nf">initial</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="c1">// -&gt; [1,2]</span>
+</code></pre>
+
+<p>Gets all but the last element of array.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<ul>
+<li>array: The array to query.</li>
+</ul>
+
+<h4 id="return">Return</h4>
+
+<p>Returns the slice of array.</p>
+
+<h3 id="hookah-intersection"><code class="prettyprint">Hookah.intersection</code></h3>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">intersection</span><span class="o">&lt;</span><span class="kt">T</span> <span class="k">where</span> <span class="kt">T</span><span class="p">:</span><span class="kt">Equatable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">arrays</span><span class="p">:[</span><span class="kt">T</span><span class="p">]</span><span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="nf">intersection</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="c1">// -&gt; [2]</span>
+</code></pre>
+
+<p>Creates an array of unique values that are included in all of the provided arrays.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<ul>
+<li>array: The arrays to inspect.</li>
+</ul>
+
+<h4 id="return">Return</h4>
+
+<p>Returns the new array of shared values.</p>
+
+<h3 id="hookah-intersectionby"><code class="prettyprint">Hookah.intersectionBy</code></h3>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">intersectionBy</span><span class="o">&lt;</span><span class="kt">T</span> <span class="k">where</span> <span class="kt">T</span><span class="p">:</span><span class="kt">Equatable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">arrays</span><span class="p">:[</span><span class="kt">T</span><span class="p">]</span><span class="o">...</span><span class="p">,</span> <span class="nv">iteratee</span><span class="p">:</span><span class="kt">T</span><span class="o">-&gt;</span><span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="nf">intersectionBy</span><span class="p">([</span><span class="mf">2.1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">],</span> <span class="p">[</span><span class="mf">4.3</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">],</span> <span class="nv">iteratee</span><span class="p">:</span><span class="n">floor</span><span class="p">)</span>
+<span class="c1">// -&gt; [2.1]</span>
+</code></pre>
+
+<p>This method is like Hookah.intersection except that it accepts iteratee which is invoked for each element of each arrays to generate the criterion by which uniqueness is computed.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<ul>
+<li>array: The arrays to inspect.</li>
+<li>iteratee: The iteratee invoked per element.</li>
+</ul>
+
+<h4 id="return">Return</h4>
+
+<p>Returns the new array of shared values.</p>
+
+<h3 id="hookah-intersectionwith"><code class="prettyprint">Hookah.intersectionWith</code></h3>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">intersectionWith</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">arrays</span><span class="p">:[</span><span class="kt">T</span><span class="p">]</span><span class="o">...</span><span class="p">,</span> <span class="nv">comparator</span><span class="p">:(</span><span class="kt">T</span><span class="p">,</span><span class="kt">T</span><span class="p">)</span><span class="o">-&gt;</span><span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span> 
+</code></pre>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">compare</span><span class="p">(</span><span class="nv">obj1</span><span class="p">:[</span><span class="kt">String</span><span class="p">:</span><span class="kt">Int</span><span class="p">],</span> <span class="nv">obj2</span><span class="p">:[</span><span class="kt">String</span><span class="p">:</span><span class="kt">Int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="n">obj1</span><span class="p">[</span><span class="s">"x"</span><span class="p">]</span> <span class="o">==</span> <span class="n">obj2</span><span class="p">[</span><span class="s">"x"</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">obj1</span><span class="p">[</span><span class="s">"y"</span><span class="p">]</span> <span class="o">==</span> <span class="n">obj2</span><span class="p">[</span><span class="s">"y"</span><span class="p">]</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">true</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">let</span> <span class="nv">a1</span> <span class="o">=</span> <span class="p">[[</span><span class="s">"x"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"y"</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="s">"x"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s">"y"</span><span class="p">:</span><span class="mi">1</span><span class="p">]]</span>
+<span class="k">let</span> <span class="nv">a2</span> <span class="o">=</span> <span class="p">[[</span><span class="s">"x"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"y"</span><span class="p">:</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="s">"x"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"y"</span><span class="p">:</span><span class="mi">2</span><span class="p">]]</span>
+<span class="kt">Hookah</span><span class="o">.</span><span class="nf">intersectionWith</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="nv">comparator</span><span class="p">:</span> <span class="n">compare</span><span class="p">)</span>
+<span class="c1">// -&gt; [["x":1, "y":2]]</span>
+</code></pre>
+
+<p>This method is like Hookah.intersection except that it accepts comparator which is invoked to compare elements of arrays.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<ul>
+<li>array: The arrays to inspect.</li>
+<li>comparator: The comparator invoked per element.</li>
+</ul>
+
+<h4 id="return">Return</h4>
+
+<p>Returns the new array of shared values.</p>
+
 <h3 id="hookah-slice"><code class="prettyprint">Hookah.slice</code></h3>
 <pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">slice</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">array</span><span class="p">:</span> <span class="p">[</span><span class="kt">T</span><span class="p">],</span> <span class="nv">start</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">end</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span>
 </code></pre>
@@ -770,6 +968,73 @@
 <h4 id="return">Return</h4>
 
 <p>The sliced array.</p>
+
+<h3 id="hookah-xor"><code class="prettyprint">Hookah.xor</code></h3>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">xor</span><span class="o">&lt;</span><span class="kt">T</span> <span class="k">where</span> <span class="kt">T</span><span class="p">:</span><span class="kt">Equatable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">arrays</span><span class="p">:[</span><span class="kt">T</span><span class="p">]</span><span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="nf">xor</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="c1">// -&gt; [1,4]</span>
+</code></pre>
+
+<p>Creates an array of unique values that is the symmetric difference of the provided arrays.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<ul>
+<li>arrays: The arrays to inspect.</li>
+</ul>
+
+<h4 id="return">Return</h4>
+
+<p>Returns the new array of values.</p>
+
+<h3 id="hookah-xorby"><code class="prettyprint">Hookah.xorBy</code></h3>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">xorBy</span><span class="o">&lt;</span><span class="kt">T</span> <span class="k">where</span> <span class="kt">T</span><span class="p">:</span><span class="kt">Equatable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">arrays</span><span class="p">:[</span><span class="kt">T</span><span class="p">]</span><span class="o">...</span><span class="p">,</span> <span class="nv">iteratee</span><span class="p">:(</span><span class="kt">T</span><span class="o">-&gt;</span><span class="kt">T</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="nf">xorBy</span><span class="p">([</span><span class="mf">2.1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">],</span> <span class="p">[</span><span class="mf">4.3</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">],</span> <span class="nv">iteratee</span><span class="p">:</span> <span class="n">floor</span><span class="p">)</span>
+<span class="c1">// -&gt; [1.2, 4.3]</span>
+</code></pre>
+
+<p>This method is like Hookah.xor except that it accepts iteratee which is invoked for each element of each arrays to generate the criterion by which uniqueness is computed.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<ul>
+<li>arrays: The arrays to inspect.</li>
+<li>iteratee: The iteratee invoked per element.</li>
+</ul>
+
+<h4 id="return">Return</h4>
+
+<p>Returns the new array of values.</p>
+
+<h3 id="hookah-xorwith"><code class="prettyprint">Hookah.xorWith</code></h3>
+<pre class="highlight swift"><code><span class="kt">Hookah</span><span class="o">.</span><span class="n">xorWith</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">arrays</span><span class="p">:[</span><span class="kt">T</span><span class="p">]</span><span class="o">...</span><span class="p">,</span> <span class="nv">comparator</span><span class="p">:(</span><span class="kt">T</span><span class="p">,</span><span class="kt">T</span><span class="p">)</span><span class="o">-&gt;</span><span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">compare</span><span class="p">(</span><span class="nv">obj1</span><span class="p">:[</span><span class="kt">String</span><span class="p">:</span><span class="kt">Int</span><span class="p">],</span> <span class="nv">obj2</span><span class="p">:[</span><span class="kt">String</span><span class="p">:</span><span class="kt">Int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="n">obj1</span><span class="p">[</span><span class="s">"x"</span><span class="p">]</span> <span class="o">==</span> <span class="n">obj2</span><span class="p">[</span><span class="s">"x"</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">obj1</span><span class="p">[</span><span class="s">"y"</span><span class="p">]</span> <span class="o">==</span> <span class="n">obj2</span><span class="p">[</span><span class="s">"y"</span><span class="p">]</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">true</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">let</span> <span class="nv">a1</span> <span class="o">=</span> <span class="p">[[</span><span class="s">"x"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"y"</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="s">"x"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s">"y"</span><span class="p">:</span><span class="mi">1</span><span class="p">]]</span>
+<span class="k">let</span> <span class="nv">a2</span> <span class="o">=</span> <span class="p">[[</span><span class="s">"x"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"y"</span><span class="p">:</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="s">"x"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">"y"</span><span class="p">:</span><span class="mi">2</span><span class="p">]]</span>
+<span class="kt">Hookah</span><span class="o">.</span><span class="nf">xorWith</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="nv">comparator</span><span class="p">:</span> <span class="n">compare</span><span class="p">)</span>
+<span class="c1">// -&gt; [["x":2,"y":1],["x":1,"y":1]]</span>
+</code></pre>
+
+<p>This method is like Hookah.xor except that it accepts comparator which is invoked to compare elements of arrays.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<ul>
+<li>arrays: The arrays to inspect.</li>
+<li>iteratee: The iteratee invoked per element.</li>
+</ul>
+
+<h4 id="return">Return</h4>
+
+<p>Returns the new array of values.</p>
 
 <h1 id="roadmap">Roadmap</h1>
 
