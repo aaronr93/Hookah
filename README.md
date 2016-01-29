@@ -1027,6 +1027,28 @@ Creates an array of unique values that is the symmetric difference of the provid
 
 Returns the new array of values.
 
+### `Hookah.xorBy`
+
+```swift
+Hookah.xorBy<T where T:Equatable>(arrays:[T]..., iteratee:(T->T)) -> [T]
+```
+
+```swift
+Hookah.xorBy([2.1, 1.2], [4.3, 2.4], iteratee: floor)
+// -> [1.2, 4.3]
+```
+
+This method is like Hookah.xor except that it accepts iteratee which is invoked for each element of each arrays to generate the criterion by which uniqueness is computed.
+
+#### Arguments ####
+
+- arrays: The arrays to inspect.
+- iteratee: The iteratee invoked per element.
+
+#### Return ####
+
+Returns the new array of values.
+
 # Roadmap #
 
 - Finish methods for String and so on. (There is alot of work to do, guys.)

@@ -469,6 +469,14 @@ extension Hookah{
         return _baseXor(arrays, isXorBy: false, comparator:==)
     }
 
+    /**
+     This method is like Hookah.xor except that it accepts iteratee which is invoked for each element of each arrays to generate the criterion by which uniqueness is computed.
+     
+     - parameter arrays:   The arrays to inspect.
+     - parameter iteratee: The iteratee invoked per element.
+     
+     - returns: Returns the new array of values.
+     */
     public class func xorBy<T where T:Equatable>(arrays:[T]..., iteratee:(T->T)) -> [T] {
         return _baseXor(arrays, isXorBy: true, comparator: ==, iteratee: iteratee)
     }
