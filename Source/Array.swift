@@ -43,6 +43,15 @@ extension Hookah{
         return _baseDifference(array, values: values, comparator:==)
     }
     
+    /**
+     This method is like Hookah.difference except that it accepts iteratee which is invoked for each element of array and values to generate the criterion by which uniqueness is computed.
+     
+     - parameter array:    The array to inspect.
+     - parameter values:   The values to exclude.
+     - parameter iteratee: The iteratee invoked per element.
+     
+     - returns: Returns the new array of filtered values.
+     */
     public class func differenceBy<T where T:Equatable>(array:[T], values:[T], iteratee:(T->T)) -> [T] {
         return _baseDifference(array, values: values, comparator:==, iteratee:iteratee)
     }

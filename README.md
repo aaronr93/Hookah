@@ -562,6 +562,29 @@ Creates an array of unique array values not included in the other provided array
 
 Returns the new array of filtered values.
 
+### `Hookah.differenceBy` (arrays)
+
+```swift
+Hookah.differenceBy<T where T:Equatable>(array:[T], values:[T], iteratee:(T->T)) -> [T]
+```
+
+```swift
+Hookah.differenceBy([3.1, 2.2, 1.3], values: [4.4, 2.5], iteratee: floor)
+// -> [3.1, 1.3]
+```
+
+This method is like Hookah.difference except that it accepts iteratee which is invoked for each element of array and values to generate the criterion by which uniqueness is computed.
+
+#### Arguments ####
+
+- array: The array to inspect.
+- values: The values to exclude.
+- iteratee: The iteratee invoked per element.
+
+#### Return ####
+
+Returns the new array of filtered values.
+
 ### `Hookah.drop`
 
 ```swift
