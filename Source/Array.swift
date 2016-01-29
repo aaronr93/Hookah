@@ -56,6 +56,15 @@ extension Hookah{
         return _baseDifference(array, values: values, comparator:==, iteratee:iteratee)
     }
     
+    /**
+     This method is like Hookah.difference except that it accepts comparator which is invoked to compare elements of array to values.
+     
+     - parameter array:      The array to inspect.
+     - parameter values:     The values to exclude.
+     - parameter comparator: The comparator invoked per element.
+     
+     - returns: Returns the new array of filtered values.
+     */
     public class func differenceWith<T>(array:[T], values:[T], comparator:((T,T)->Bool)) -> [T] {
         return _baseDifference(array, values: values, comparator: comparator)
     }

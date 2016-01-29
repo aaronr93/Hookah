@@ -540,7 +540,7 @@ Creates a new array concatenating additional arrays.
 
 The new concatenated array.
 
-### `Hookah.difference` (arrays)
+### `Hookah.difference` 
 
 ```swift
 Hookah.difference<T where T:Equatable>(array:[T], values:[T])-> [T]
@@ -562,7 +562,7 @@ Creates an array of unique array values not included in the other provided array
 
 Returns the new array of filtered values.
 
-### `Hookah.differenceBy` (arrays)
+### `Hookah.differenceBy` 
 
 ```swift
 Hookah.differenceBy<T where T:Equatable>(array:[T], values:[T], iteratee:(T->T)) -> [T]
@@ -580,6 +580,35 @@ This method is like Hookah.difference except that it accepts iteratee which is i
 - array: The array to inspect.
 - values: The values to exclude.
 - iteratee: The iteratee invoked per element.
+
+#### Return ####
+
+Returns the new array of filtered values.
+
+### `Hookah.differenceWith` 
+
+```swift
+Hookah.differenceWith<T>(array:[T], values:[T], comparator:((T,T)->Bool)) -> [T]
+```
+
+```swift
+func compare(obj1:[String:Int], obj2:[String:Int]) -> Bool {
+    if obj1["x"] == obj2["x"] && obj1["y"] == obj2["y"] {
+        return true
+    }
+    return false;
+}
+Hookah.differenceWith([["x":1,"y":2], ["x":2, "y":1]], values: [["x":1, "y":2]], comparator: compare)
+// -> [["x":2, "y":1]]
+```
+
+This method is like Hookah.difference except that it accepts comparator which is invoked to compare elements of array to values.
+
+#### Arguments ####
+
+- array: The array to inspect.
+- values: The values to exclude.
+- comparator: The comparator invoked per element.
 
 #### Return ####
 
