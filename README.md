@@ -1,4 +1,4 @@
-Hookah [![Build Status](https://travis-ci.org/khoiln/Hookah.svg?branch=master)](https://travis-ci.org/khoiln/Hookah) ![CocoaPods](https://img.shields.io/cocoapods/v/Hookah.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Platform](https://img.shields.io/cocoapods/p/Hookah.svg?style=flat)](http://cocoadocs.org/docsets/Hookah)
+Hookah [![Build Status](https://travis-ci.org/HookahSwift/Hookah.svg?branch=master)](https://travis-ci.org/HookahSwift/Hookah) ![CocoaPods](https://img.shields.io/cocoapods/v/Hookah.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Platform](https://img.shields.io/cocoapods/p/Hookah.svg?style=flat)](http://cocoadocs.org/docsets/Hookah)
 ===========
 Hookah is a functional library for Swift. It's inspired by Lo-Dash project.
 
@@ -41,7 +41,7 @@ $ brew install carthage
 To integrate Alamofire into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "khoiln/Hookah" ~> 0.0.2
+github "HookahSwift/Hookah" ~> 1.0.0
 ```
 
 Run `carthage update` to build the framework and drag the built `Hookah.framework` into your Xcode project.
@@ -1085,4 +1085,4 @@ Returns the new array of values.
 - Add more test cases.
 
 # Contributing #
-All contributions Hookah are extremely welcome. Checkout [CONTRIBUTING.md](https://github.com/khoiln/Hookah/blob/master/CONTRIBUTING.md)
+All contributions Hookah are extremely welcome. Checkout [CONTRIBUTING.md](https://github.com/HookahSwift/Hookah/blob/master/CONTRIBUTING.md)
