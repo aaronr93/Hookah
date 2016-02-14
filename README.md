@@ -19,7 +19,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'Hookah', '~> 0.0.2'
+pod 'Hookah', '~> 1.0.0'
 ```
 
 Then, run the following command:
