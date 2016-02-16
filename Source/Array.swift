@@ -232,14 +232,51 @@ extension Hookah{
      */
     //TODO: If the array is sorted using binary search instead
     public class func indexOf<T where T:Equatable>(array:[T], value:T, fromIndex:UInt?=nil) -> Int? {
-        let fromIdx = fromIndex ?? 0
-        guard Int(fromIdx) < array.count else {return nil}
-        for i in Int(fromIdx)..<array.count {
-            if array[i] == value {
-                return i
-            }
+//        let fromIdx = fromIndex ?? 0
+//        guard Int(fromIdx) < array.count else {return nil}
+//        for i in Int(fromIdx)..<array.count {
+//            if array[i] == value {
+//                return i
+//            }
+//        }
+//        return nil
+        return _baseIndexOf(array, value: value, fromIndex: fromIndex ?? 0)
+    }
+    
+    public class func lastIndexOf<T where T:Equatable>(array:[T], value:T, fromIndex:UInt?=nil) -> Int? {
+        return _baseIndexOf(array, value: value, fromIndex: fromIndex ?? UInt(array.count-1), leftToRight: false)
+    }
+    
+    private class func _baseIndexOf<T where T:Equatable>(array:[T], value:T, fromIndex:UInt, leftToRight:Bool=true) -> Int? {
+        
+        guard !(fromIndex >= UInt(array.count) && leftToRight == true) else {
+            return nil
         }
-        return nil
+        
+        var fromIdx = Int(fromIndex)
+        var toIdx = fromIdx
+        var step  = 0
+        
+        if leftToRight {
+            toIdx = array.count
+            step = 1
+        } else {
+            fromIdx = min(fromIdx,array.count-1)
+            toIdx = -1
+            step = -1
+        }
+        
+        var result:Int? = nil
+        var idx = fromIdx
+        repeat {
+            if array[idx] == value {
+                result = idx
+                break
+            }
+            idx += step
+        } while idx != toIdx
+        
+        return result
     }
     
     /**

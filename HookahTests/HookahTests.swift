@@ -362,6 +362,13 @@ class HookahTests: XCTestCase {
         XCTAssertEqual(Hookah.indexOf([1,2,1,2], value:3, fromIndex:10), nil, "")
     }
     
+    func testLastIndexOf() {
+        XCTAssertEqual(Hookah.lastIndexOf([1,2,1,2], value:2), 3, "")
+        XCTAssertEqual(Hookah.lastIndexOf([1,2,1,2], value:2, fromIndex:2), 1, "")
+        XCTAssertEqual(Hookah.lastIndexOf([1,2,1,2], value:3), nil, "")
+        XCTAssertEqual(Hookah.lastIndexOf([1,2,1,2], value:2, fromIndex:10), 3, "")
+    }
+    
     func testInitial() {
         XCTAssertEqual(Hookah.initial([1]), [], "")
         XCTAssertEqual(Hookah.initial([Int]()), [], "")
