@@ -11,4 +11,4 @@ let idx = arr1.indexOf(6)
 
 let jointer = ":"
 let elements = ["one", "two", "three"]
-elements.enumerate().m
+arr1.reverse()

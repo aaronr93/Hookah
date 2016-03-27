@@ -279,6 +279,74 @@ extension Hookah{
         return result
     }
     
+    public class func reverse<T>(array:[T]) -> [T] {
+        var newArray = [T]()
+        for var i = array.count-1; i >= 0; --i {
+            newArray.append(array[i])
+        }
+        
+        return newArray
+    }
+
+    public class func sortedIndex<T where T:Comparable>(array:[T], value:T) -> Int {
+        return baseSortedIndex(array, value: value)
+    }
+    
+    public class func sortedIndexBy<T,U where U:Comparable>(array:[T], value:T, iteratee:T->U) -> Int {
+        return baseSortedIndexBy(array, value: value, iteratee: iteratee)
+    }
+    
+    public class func sortedIndexOf<T where T:Comparable>(array:[T], value:T) -> Int? {
+        let index = baseSortedIndex(array, value: value)
+        if index < array.count && array[index] == value {
+            return index
+        }
+        
+        return nil
+    }
+    
+    public class func sortedLastIndex<T where T:Comparable>(array:[T], value:T) -> Int {
+        return baseSortedIndex(array, value: value, retHighest: true)
+    }
+    
+    public class func sortedLastIndexBy<T, U where U:Comparable>(array:[T], value:T, iteratee:T->U) -> Int {
+        return baseSortedIndexBy(array, value: value, iteratee: iteratee, retHighest: true)
+    }
+    
+    public class func sortedLastIndexOf<T where T:Comparable>(array:[T], value:T) -> Int? {
+        let index = baseSortedIndex(array, value: value, retHighest: true) - 1
+        if index >= 0 && array[index] == value {
+            return index
+        }
+        
+        return nil
+    }
+    
+    private class func baseSortedIndex<T where T:Comparable>(array:[T], value:T, retHighest:Bool=false) -> Int {
+        return baseSortedIndexBy(array,
+            value: value,
+            iteratee: {return $0},
+            retHighest: retHighest)
+    }
+    
+    private class func baseSortedIndexBy<T,U where U:Comparable>(array:[T], value:T, iteratee:T->U, retHighest:Bool=false) -> Int {
+        let newValue = iteratee(value)
+        var low = 0, high = array.count
+        
+        while (low < high) {
+            let mid = (low + high)>>1
+            let computed = iteratee(array[mid])
+            let setLow = retHighest ? (computed <= newValue) : (computed < newValue)
+            
+            if setLow {
+                low = mid + 1
+            } else {
+                high = mid
+            }
+        }
+        
+        return high
+    }
     /**
      Gets all but the last element of array.
      

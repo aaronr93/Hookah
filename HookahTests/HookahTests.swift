@@ -391,4 +391,33 @@ class HookahTests: XCTestCase {
         
         XCTAssertEqual(Hookah.intersectionWith(objects1, objects2, comparator: compare), [["x":1, "y":2]], "")
     }
+    
+    func testSortedIndex() {
+        XCTAssertEqual(Hookah.sortedIndex([], value:40), 0, "")
+        XCTAssertEqual(Hookah.sortedIndex([30, 50], value:40), 1, "")
+        XCTAssertEqual(Hookah.sortedIndex([4, 5], value:4), 0, "")
+        XCTAssertEqual(Hookah.sortedIndex([4, 4, 5], value:4), 0, "")
+        XCTAssertEqual(Hookah.sortedIndex([4, 4, 5], value:6), 3, "")
+    }
+    
+    func testSortedIndexBy() {
+        let iteratee = {dict:[String:Int]->Int in
+            return dict
+        }
+    }
+    
+    func testSortedIndexOf() {
+    
+    }
+    
+    func testSortedLastIndex() {
+    
+    }
+    
+    func testSortedLastIndexBy() {
+    }
+    
+    func testSortedLastIndexOf() {
+    }
+    
 }
