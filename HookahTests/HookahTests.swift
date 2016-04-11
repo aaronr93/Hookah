@@ -401,9 +401,9 @@ class HookahTests: XCTestCase {
     }
     
     func testSortedIndexBy() {
-        let iteratee = {dict:[String:Int]->Int in
-            return dict
-        }
+//        let iteratee = {dict:[String:Int]->Int in
+//            return dict
+//        }
     }
     
     func testSortedIndexOf() {

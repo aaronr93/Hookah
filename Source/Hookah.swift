@@ -74,9 +74,11 @@ public class Hookah{
      */
     public class func eachRight<T where T:CollectionType, T.Index == Int>(collection: T,@noescape iteratee: T.Generator.Element throws -> ()) rethrows{
         var length = collection.count;
-        while (--length >= 0) {
+        repeat{
+            length -= 1
             try iteratee(collection[length])
-        }
+        } while length > 0
+        
     }
     
     /**
@@ -221,11 +223,12 @@ public class Hookah{
      */
     public class func findLast<T where T:CollectionType, T.Index == Int>(collection: T,@noescape predicate: T.Generator.Element throws -> Bool) rethrows -> T.Generator.Element?{
         var length = collection.count;
-        while (--length >= 0) {
+        repeat{
+            length -= 1
             if try predicate(collection[length]) == true{
                 return collection[length]
             }
-        }
+        } while length > 0
         return nil
     }
     
@@ -365,7 +368,7 @@ public class Hookah{
         } else {
             var size = 0
             for _ in collection{
-                ++size
+                size += 1
             }
             return size
         }
