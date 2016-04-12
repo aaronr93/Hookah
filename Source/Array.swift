@@ -280,12 +280,7 @@ extension Hookah{
     }
     
     public class func reverse<T>(array:[T]) -> [T] {
-        var newArray = [T]()
-        for var i = array.count-1; i >= 0; --i {
-            newArray.append(array[i])
-        }
-        
-        return newArray
+        return array.reverse()
     }
 
     public class func sortedIndex<T where T:Comparable>(array:[T], value:T) -> Int {
