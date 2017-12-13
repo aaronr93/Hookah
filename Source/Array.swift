@@ -39,8 +39,8 @@ extension Hookah{
      
      - returns: Returns the new array of filtered values.
      */
-    public class func difference<T where T:Equatable>(array:[T], values:[T])-> [T] {
-        return _baseDifference(array, values: values, comparator:==)
+    public class func difference<T>(array:[T], values:[T])-> [T] where T:Equatable {
+        return _baseDifference(array: array, values: values, comparator:==)
     }
     
     /**
@@ -52,8 +52,8 @@ extension Hookah{
      
      - returns: Returns the new array of filtered values.
      */
-    public class func differenceBy<T where T:Equatable>(array:[T], values:[T], iteratee:(T->T)) -> [T] {
-        return _baseDifference(array, values: values, comparator:==, iteratee:iteratee)
+    public class func differenceBy<T>(array:[T], values:[T], iteratee: @escaping (T) -> T) -> [T] where T:Equatable {
+        return _baseDifference(array: array, values: values, comparator:==, iteratee:iteratee)
     }
     
     /**
@@ -66,10 +66,10 @@ extension Hookah{
      - returns: Returns the new array of filtered values.
      */
     public class func differenceWith<T>(array:[T], values:[T], comparator:((T,T)->Bool)) -> [T] {
-        return _baseDifference(array, values: values, comparator: comparator)
+        return _baseDifference(array: array, values: values, comparator: comparator)
     }
     
-    private class func _baseDifference<T>(array:[T], values:[T], comparator:((T,T)->Bool), iteratee:(T->T)?=nil) -> [T] {
+    private class func _baseDifference<T>(array:[T], values:[T], comparator: (T,T) -> Bool, iteratee:((T)->T)?=nil) -> [T] {
         var result = [T]()
         for elem1 in array {
             var isUnique = true
@@ -77,7 +77,7 @@ extension Hookah{
             
             for elem2 in values {
                 let val2 = iteratee != nil ? iteratee!(elem2) : elem2
-
+                
                 if comparator(val1, val2) {
                     isUnique = false
                     break
@@ -118,7 +118,7 @@ extension Hookah{
      
      - returns: The new array contains chunks
      */
-    public class func chunk<T>(array: [T], size: Int = 0) -> [[T]]{
+    public class func chunk<T>(array: [T], size: Int = 0) -> [[T]] where T: Equatable {
         var result = [[T]]()
         if size < 1 {
             return result
@@ -128,7 +128,7 @@ extension Hookah{
         while (i < length){
             let start = i
             i += size
-            result.append(slice(array, start: start, end: i))
+            result.append(slice(array: array, start: start, end: i))
         }
         return result
     }
@@ -143,7 +143,7 @@ extension Hookah{
      */
     public class func concat<T>(array: [T], values: T...) -> [T]{
         var result = Array(array)
-        result.appendContentsOf(values)
+        result.append(contentsOf: values)
         return result
     }
     
@@ -158,7 +158,7 @@ extension Hookah{
     public class func concat<T>(array: [T], arrays: [T]...) -> [T]{
         var result = Array(array)
         for arr in arrays{
-            result.appendContentsOf(arr)
+            result.append(contentsOf: arr)
         }
         return result
     }
@@ -169,7 +169,7 @@ extension Hookah{
         for element in array {
             if let val = element as? [T] {
                 if isDeep {
-                    result += _baseFlatten(val, isDeep:true)
+                    result += _baseFlatten(array: val, isDeep:true)
                 } else {
                     result += val
                 }
@@ -190,10 +190,10 @@ extension Hookah{
      
      - returns: Returns the new array.
      */
-    public class func flatMap<T>(array:[T], iteratee:T->[T]) -> [T] {
+    public class func flatMap<T>(array:[T], iteratee:(T)->[T]) -> [T] {
         var result = [T]()
         for elem in array {
-            result.appendContentsOf(iteratee(elem))
+            result.append(contentsOf: iteratee(elem))
         }
         
         return result
@@ -207,7 +207,7 @@ extension Hookah{
      - returns: The new flattened array.
      */
     public class func flatten<T>(array: [T]) -> [T] {
-        return _baseFlatten(array)
+        return _baseFlatten(array: array)
     }
     
     /**
@@ -218,7 +218,7 @@ extension Hookah{
      - returns: The new flattened array.
      */
     public class func flattenDeep<T>(array: [T]) -> [T]{
-        return _baseFlatten(array, isDeep:true)
+        return _baseFlatten(array: array, isDeep:true)
     }
     
     /**
@@ -231,23 +231,23 @@ extension Hookah{
      - returns:  Returns the index of the matched value, else `nil`.
      */
     //TODO: If the array is sorted using binary search instead
-    public class func indexOf<T where T:Equatable>(array:[T], value:T, fromIndex:UInt?=nil) -> Int? {
-//        let fromIdx = fromIndex ?? 0
-//        guard Int(fromIdx) < array.count else {return nil}
-//        for i in Int(fromIdx)..<array.count {
-//            if array[i] == value {
-//                return i
-//            }
-//        }
-//        return nil
-        return _baseIndexOf(array, value: value, fromIndex: fromIndex ?? 0)
+    public class func indexOf<T>(array:[T], value:T, fromIndex:UInt?=nil) -> Int? where T:Equatable {
+        //        let fromIdx = fromIndex ?? 0
+        //        guard Int(fromIdx) < array.count else {return nil}
+        //        for i in Int(fromIdx)..<array.count {
+        //            if array[i] == value {
+        //                return i
+        //            }
+        //        }
+        //        return nil
+        return _baseIndexOf(array: array, value: value, fromIndex: fromIndex ?? 0)
     }
     
-    public class func lastIndexOf<T where T:Equatable>(array:[T], value:T, fromIndex:UInt?=nil) -> Int? {
-        return _baseIndexOf(array, value: value, fromIndex: fromIndex ?? UInt(array.count-1), leftToRight: false)
+    public class func lastIndexOf<T>(array:[T], value:T, fromIndex:UInt?=nil) -> Int? where T:Equatable {
+        return _baseIndexOf(array: array, value: value, fromIndex: fromIndex ?? UInt(array.count-1), leftToRight: false)
     }
     
-    private class func _baseIndexOf<T where T:Equatable>(array:[T], value:T, fromIndex:UInt, leftToRight:Bool=true) -> Int? {
+    private class func _baseIndexOf<T>(array:[T], value:T, fromIndex:UInt, leftToRight:Bool=true) -> Int? where T:Equatable {
         
         guard !(fromIndex >= UInt(array.count) && leftToRight == true) else {
             return nil
@@ -280,19 +280,19 @@ extension Hookah{
     }
     
     public class func reverse<T>(array:[T]) -> [T] {
-        return array.reverse()
-    }
-
-    public class func sortedIndex<T where T:Comparable>(array:[T], value:T) -> Int {
-        return baseSortedIndex(array, value: value)
+        return array.reversed()
     }
     
-    public class func sortedIndexBy<T,U where U:Comparable>(array:[T], value:T, iteratee:T->U) -> Int {
-        return baseSortedIndexBy(array, value: value, iteratee: iteratee)
+    public class func sortedIndex<T>(array:[T], value:T) -> Int where T:Comparable {
+        return baseSortedIndex(array: array, value: value)
     }
     
-    public class func sortedIndexOf<T where T:Comparable>(array:[T], value:T) -> Int? {
-        let index = baseSortedIndex(array, value: value)
+    public class func sortedIndexBy<T,U>(array:[T], value:T, iteratee:(T)->U) -> Int where U:Comparable {
+        return baseSortedIndexBy(array: array, value: value, iteratee: iteratee)
+    }
+    
+    public class func sortedIndexOf<T>(array:[T], value:T) -> Int? where T:Comparable {
+        let index = baseSortedIndex(array: array, value: value)
         if index < array.count && array[index] == value {
             return index
         }
@@ -300,16 +300,16 @@ extension Hookah{
         return nil
     }
     
-    public class func sortedLastIndex<T where T:Comparable>(array:[T], value:T) -> Int {
-        return baseSortedIndex(array, value: value, retHighest: true)
+    public class func sortedLastIndex<T>(array:[T], value:T) -> Int where T:Comparable {
+        return baseSortedIndex(array: array, value: value, retHighest: true)
     }
     
-    public class func sortedLastIndexBy<T, U where U:Comparable>(array:[T], value:T, iteratee:T->U) -> Int {
-        return baseSortedIndexBy(array, value: value, iteratee: iteratee, retHighest: true)
+    public class func sortedLastIndexBy<T, U>(array:[T], value:T, iteratee:(T)->U) -> Int where U:Comparable {
+        return baseSortedIndexBy(array: array, value: value, iteratee: iteratee, retHighest: true)
     }
     
-    public class func sortedLastIndexOf<T where T:Comparable>(array:[T], value:T) -> Int? {
-        let index = baseSortedIndex(array, value: value, retHighest: true) - 1
+    public class func sortedLastIndexOf<T>(array:[T], value:T) -> Int? where T:Comparable {
+        let index = baseSortedIndex(array: array, value: value, retHighest: true) - 1
         if index >= 0 && array[index] == value {
             return index
         }
@@ -317,14 +317,14 @@ extension Hookah{
         return nil
     }
     
-    private class func baseSortedIndex<T where T:Comparable>(array:[T], value:T, retHighest:Bool=false) -> Int {
-        return baseSortedIndexBy(array,
-            value: value,
-            iteratee: {return $0},
-            retHighest: retHighest)
+    private class func baseSortedIndex<T>(array:[T], value:T, retHighest:Bool=false) -> Int where T:Comparable {
+        return baseSortedIndexBy(array: array,
+                                 value: value,
+                                 iteratee: {return $0},
+                                 retHighest: retHighest)
     }
     
-    private class func baseSortedIndexBy<T,U where U:Comparable>(array:[T], value:T, iteratee:T->U, retHighest:Bool=false) -> Int {
+    private class func baseSortedIndexBy<T,U>(array:[T], value:T, iteratee:(T)->U, retHighest:Bool=false) -> Int where U:Comparable {
         let newValue = iteratee(value)
         var low = 0, high = array.count
         
@@ -350,7 +350,7 @@ extension Hookah{
      - returns: Returns the slice of array.
      */
     public class func initial<T>(array:[T]) -> [T] {
-        return slice(array, start: 0, end: array.count-1)
+        return slice(array: array, start: 0, end: array.count-1)
     }
     
     /**
@@ -360,8 +360,8 @@ extension Hookah{
      
      - returns: Returns the new array of shared values.
      */
-    public class func intersection<T where T:Equatable>(arrays:[T]...) -> [T] {
-        return _baseIntersection(Array(arrays), comparator:==)
+    public class func intersection<T>(arrays:[T]...) -> [T] where T:Equatable {
+        return _baseIntersection(arrays: Array(arrays), comparator:==)
     }
     
     /**
@@ -372,8 +372,8 @@ extension Hookah{
      
      - returns: Returns the new array of shared values.
      */
-    public class func intersectionBy<T where T:Equatable>(arrays:[T]..., iteratee:T->T) -> [T] {
-        return _baseIntersection(Array(arrays), comparator:==, iteratee:iteratee)
+    public class func intersectionBy<T>(arrays:[T]..., iteratee:@escaping (T)->T) -> [T] where T:Equatable {
+        return _baseIntersection(arrays: Array(arrays), comparator:==, iteratee:iteratee)
     }
     
     /**
@@ -385,20 +385,20 @@ extension Hookah{
      - returns: Returns the new array of shared values.
      */
     public class func intersectionWith<T>(arrays:[T]..., comparator:(T,T)->Bool) -> [T] {
-        return _baseIntersection(Array(arrays), comparator: comparator)
+        return _baseIntersection(arrays: Array(arrays), comparator: comparator)
     }
     
     public class func join(array:[String], separator:String=",") -> String {
-//        Hookah.reduce(array.enumerate(), initial: <#T##E#>, combine: <#T##(E, T.Generator.Element) throws -> E#>)
-//        return array.reduce("", combine: {$0 + $1.element})
-
+        //        Hookah.reduce(array.enumerate(), initial: <#T##E#>, combine: <#T##(E, T.Generator.Element) throws -> E#>)
+        //        return array.reduce("", combine: {$0 + $1.element})
         
-//        return Hookah.reduce(array.enumerate(), initial: "", combine: {$0 + $1.element + ($1.index < array.endIndex-1 ? separator : "")})
+        
+        //        return Hookah.reduce(array.enumerate(), initial: "", combine: {$0 + $1.element + ($1.index < array.endIndex-1 ? separator : "")})
         // TODO:
         return ""
     }
     
-    public class func _baseIntersection<T>(arrays:[[T]], comparator:(T,T)->Bool, iteratee:(T->T)?=nil) -> [T] {
+    public class func _baseIntersection<T>(arrays:[[T]], comparator:(T,T)->Bool, iteratee:((T)->T)?=nil) -> [T] {
         guard arrays.count > 0 else {return []}
         guard arrays.count > 1 else {return arrays[0]}
         
@@ -435,7 +435,7 @@ extension Hookah{
      - returns: Returns the slice of array.
      */
     public class func drop<T>(array: [T], n: Int = 1) -> [T]{
-        return slice(array, start: n < 0 ? 0 : n, end: array.count)
+        return slice(array: array, start: n < 0 ? 0 : n, end: array.count)
     }
     
     /**
@@ -448,14 +448,23 @@ extension Hookah{
      */
     public class func dropRight<T>(array: [T], n: Int = 1) -> [T]{
         let end = array.count - n
-        return slice(array, start: 0, end: end < 0 ? 0 : end)
+        return slice(array: array, start: 0, end: end < 0 ? 0 : end)
     }
     
-    private class func baseWhile<T>(array: [T], predicate: (T -> Bool), isDrop: Bool = false, fromRight: Bool = false) -> [T]{
+    private class func baseWhile<T>(array: [T], predicate: ((T) -> Bool), isDrop: Bool = false, fromRight: Bool = false) -> [T] {
         let length = array.count
         var index = fromRight ? length : -1
-        while (fromRight ? --index > 0 : ++index < length) && predicate(array[index]){}
-        return isDrop ? slice(array, start: fromRight ? 0 : index, end: fromRight ? index + 1 : length) : slice(array, start: fromRight ? index + 1 : 0, end: fromRight ? length : index)
+        while (fromRight ? index > 0 : index < length) {
+            if (fromRight) {
+                index -= 1
+            } else {
+                index += 1
+            }
+            if (!predicate(array[index])) {
+                break
+            }
+        }
+        return isDrop ? slice(array: array, start: fromRight ? 0 : index, end: fromRight ? index + 1 : length) : slice(array: array, start: fromRight ? index + 1 : 0, end: fromRight ? length : index)
     }
     
     /**
@@ -467,8 +476,8 @@ extension Hookah{
      - returns : Returns the slice of array.
      */
     
-    public class func dropWhile<T>(array: [T], predicate: T -> Bool) -> [T]{
-        return baseWhile(array, predicate: predicate, isDrop: true, fromRight: false)
+    public class func dropWhile<T>(array: [T], predicate: (T) -> Bool) -> [T]{
+        return baseWhile(array: array, predicate: predicate, isDrop: true, fromRight: false)
     }
     
     /**
@@ -479,8 +488,8 @@ extension Hookah{
      
      - returns : Returns the slice of array.
      */
-    public class func dropRightWhile<T>(array: [T], predicate: T -> Bool) -> [T]{
-        return baseWhile(array, predicate: predicate, isDrop: true, fromRight: true)
+    public class func dropRightWhile<T>(array: [T], predicate: (T) -> Bool) -> [T]{
+        return baseWhile(array: array, predicate: predicate, isDrop: true, fromRight: true)
     }
     
     /**
@@ -492,7 +501,7 @@ extension Hookah{
      - parameter value:   The value to fill the array with
      - parameter indexes: The indexes that the value will be filled.
      */
-    public class func fill<T>(inout array: [T], value: T, indexes: [Int]){
+    public class func fill<T>(array: inout [T], value: T, indexes: [Int]){
         indexes.forEach { (idx) -> () in
             if case 0..<array.count = idx {
                 array[idx] = value
@@ -508,21 +517,26 @@ extension Hookah{
      - parameter start: The start position. `0` by default.
      - parameter end:   The end position. `nil` by default.
      */
-    public class func fill<T>(inout array: [T], value: T, start: Int = 0, end: Int? = nil) {
+    public class func fill<T>(array: inout [T], value: T, start: Int? = 0, end: Int? = nil) {
         var end = end ?? array.count
         if end > array.count {
             end = array.count
         }
-        let indexes = Array<Int>(start..<(start + end))
-        self.fill(&array, value: value, indexes: indexes)
+        let indexes = Array<Int>(start!..<(start! + end))
+        self.fill(array: &array, value: value, indexes: indexes)
     }
     
-    private class func baseFindIndex<T>(array: [T], fromRight: Bool = false, predicate: T -> Bool) -> Int{
+    private class func baseFindIndex<T>(array: [T], fromRight: Bool = false, predicate: (T) -> Bool) -> Int{
         let length = array.count
-        var index = fromRight ? length : -1;
-        while fromRight ? index-- > 0 : ++index < length {
+        var index = fromRight ? length-1 : 0;
+        while fromRight ? index > 0 : index < length {
             if predicate(array[index])  {
                 return index;
+            }
+            if (fromRight) {
+                index -= 1
+            } else {
+                index += 1
             }
         }
         return -1;
@@ -536,8 +550,8 @@ extension Hookah{
      
      - returns: Returns the index of the found element, else -1.
      */
-    public class func findIndex<T>(array: [T], predicate: T -> Bool) -> Int{
-        return baseFindIndex(array, fromRight: false, predicate: predicate)
+    public class func findIndex<T>(array: [T], predicate: (T) -> Bool) -> Int{
+        return baseFindIndex(array: array, fromRight: false, predicate: predicate)
     }
     
     /**
@@ -548,8 +562,8 @@ extension Hookah{
      
      - returns: Returns the index of the found element, else -1.
      */
-    public class func findLastIndex<T>(array: [T], predicate: T -> Bool) -> Int{
-        return baseFindIndex(array, fromRight: true, predicate: predicate)
+    public class func findLastIndex<T>(array: [T], predicate: (T) -> Bool) -> Int{
+        return baseFindIndex(array: array, fromRight: true, predicate: predicate)
     }
     
     enum XorType {
@@ -565,10 +579,10 @@ extension Hookah{
      
      - returns: Returns the new array of values.
      */
-    public class func xor<T where T:Equatable>(arrays:[T]...) -> [T] {
-        return _baseXor(arrays, isXorBy: false, comparator:==)
+    public class func xor<T>(arrays:[T]...) -> [T] where T:Equatable {
+        return _baseXor(arrays: arrays, isXorBy: false, comparator:==)
     }
-
+    
     /**
      This method is like Hookah.xor except that it accepts iteratee which is invoked for each element of each arrays to generate the criterion by which uniqueness is computed.
      
@@ -577,8 +591,8 @@ extension Hookah{
      
      - returns: Returns the new array of values.
      */
-    public class func xorBy<T where T:Equatable>(arrays:[T]..., iteratee:(T->T)) -> [T] {
-        return _baseXor(arrays, isXorBy: true, comparator: ==, iteratee: iteratee)
+    public class func xorBy<T>(arrays:[T]..., iteratee:@escaping ((T)->T)) -> [T] where T:Equatable {
+        return _baseXor(arrays: arrays, isXorBy: true, comparator: ==, iteratee: iteratee)
     }
     
     /**
@@ -590,20 +604,20 @@ extension Hookah{
      - returns: Returns the new array of values.
      */
     public class func xorWith<T>(arrays:[T]..., comparator:(T,T)->Bool) -> [T] {
-        return _baseXor(arrays, isXorBy:false, comparator:comparator)
+        return _baseXor(arrays: arrays, isXorBy:false, comparator:comparator)
     }
     
-    private class func _baseXor<T>(arrays:[[T]], isXorBy:Bool, comparator:(T,T)->Bool, iteratee:(T->T)?=nil) -> [T] {
+    private class func _baseXor<T>(arrays:[[T]], isXorBy:Bool, comparator:(T,T)->Bool, iteratee:((T)->T)?=nil) -> [T] {
         guard arrays.count > 0 else {return []}
         guard arrays.count > 1 else {return arrays[0]}
         
         var result = arrays[arrays.count-1]
         
-        for i in (0...arrays.count-2).reverse() {
+        for i in (0...arrays.count-2).reversed() {
             let nextArr = arrays[i]
             print(nextArr)
             var tmp = [T]()
-            var uniqueElemMarker = [Bool](count: result.count, repeatedValue: true)
+            var uniqueElemMarker = [Bool](repeating: true, count: result.count)
             
             for elem1 in nextArr {
                 var isUnique = true
@@ -645,3 +659,4 @@ extension Hookah{
         return result
     }
 }
+

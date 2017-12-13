@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Hookah{
+extension Hookah {
     
     /**
      Return a random integer from lowerbound to upperbound inclusively
@@ -18,8 +18,9 @@ extension Hookah{
      
      - returns: A random integer
      */
-    public class func random(lower lower: Int = 0, upper: Int = 1) -> Int{
+    public class func random(lower: Int = 0, upper: Int = 1) -> Int{
         assert(upper >= lower, "Lowerbound must be smaller than upper bound")
         return Int(arc4random_uniform(UInt32(upper - lower + 1))) + lower
     }
 }
+

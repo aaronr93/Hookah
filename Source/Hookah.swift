@@ -8,8 +8,7 @@
 
 import Foundation
 
-
-public class Hookah{
+public class Hookah {
     /**
      Get the first element of a collection.
      
@@ -17,8 +16,8 @@ public class Hookah{
      
      - returns: The first element of collection or nil.
      */
-    public class func first<T where T: CollectionType, T.Index == Int>(collection: T) -> T.Generator.Element?{
-        return head(collection)
+    public class func first<T>(collection: T) -> T.Iterator.Element? where T: Collection, T.Index == Int{
+        return head(collection: collection)
     }
     
     /**
@@ -29,7 +28,7 @@ public class Hookah{
      - returns: The first element of collection or nil.
      */
     
-    public class func head<T where T:CollectionType, T.Index == Int>(collection: T) -> T.Generator.Element?{
+    public class func head<T>(collection: T) -> T.Iterator.Element? where T: Collection, T.Index == Int{
         return collection.isEmpty ? nil : collection.first
     }
     
@@ -40,8 +39,9 @@ public class Hookah{
      
      - returns: The last element of the collection or nil.
      */
-    public class func last<T where T:CollectionType, T.Index: BidirectionalIndexType>(collection: T) -> T.Generator.Element?{
-        return collection.isEmpty ? nil : collection.last
+    public class func last<T>(collection: T) -> T.Iterator.Element? where T: Collection {
+        let index = collection.index(collection.endIndex, offsetBy: -1)
+        return collection.isEmpty ? nil : collection[index]
     }
     
     /**
@@ -50,7 +50,7 @@ public class Hookah{
      - parameter collection: The collection to iterate over.
      - parameter iteratee:   The function invoked per iteration.
      */
-    public class func each<T where T:CollectionType>(collection: T,@noescape iteratee: T.Generator.Element throws -> ()) rethrows{
+    public class func each<T>(collection: T, iteratee: (T.Iterator.Element) throws -> ()) rethrows where T: Collection{
         for element in collection{
             try iteratee(element)
         }
@@ -62,8 +62,8 @@ public class Hookah{
      - parameter collection: The collection to iterate over.
      - parameter iteratee:   The function invoked per iteration.
      */
-    public class func forEach<T where T:CollectionType>(collection: T,@noescape iteratee: T.Generator.Element throws -> ()) rethrows{
-        try each(collection, iteratee: iteratee)
+    public class func forEach<T>(collection: T, iteratee: (T.Iterator.Element) throws -> ()) rethrows where T: Collection{
+        try each(collection: collection, iteratee: iteratee)
     }
     
     /**
@@ -72,8 +72,8 @@ public class Hookah{
      - parameter collection: The collection to iterate over.
      - parameter iteratee:   The function invoked per iteration.
      */
-    public class func eachRight<T where T:CollectionType, T.Index == Int>(collection: T,@noescape iteratee: T.Generator.Element throws -> ()) rethrows{
-        var length = collection.count;
+    public class func eachRight<T>(collection: T, iteratee: (T.Iterator.Element) throws -> ()) rethrows where T: Collection, T.Index == Int{
+        var length = Int(collection.count);
         repeat{
             length -= 1
             try iteratee(collection[length])
@@ -87,8 +87,8 @@ public class Hookah{
      - parameter collection: The collection to iterate over.
      - parameter iteratee:   The function invoked per iteration.
      */
-    public class func forEachRight<T where T:CollectionType, T.Index == Int>(collection: T,@noescape iteratee: T.Generator.Element throws -> ()) rethrows{
-        try eachRight(collection, iteratee: iteratee)
+    public class func forEachRight<T>(collection: T, iteratee: (T.Iterator.Element) throws -> ()) rethrows where T: Collection, T.Index == Int{
+        try eachRight(collection: collection, iteratee: iteratee)
     }
     
     /**
@@ -101,9 +101,9 @@ public class Hookah{
      
      - returns: The new mapped array.
      */
-    public class func map<T: CollectionType, E>(collection: T,@noescape transform: T.Generator.Element throws -> E ) rethrows -> [E]{
+    public class func map<T: Collection, E>(collection: T,transform: (T.Iterator.Element) throws -> E ) rethrows -> [E]{
         var result = [E]()
-        try each(collection){
+        try each(collection: collection){
             result.append(try transform($0))
         }
         return result
@@ -119,9 +119,9 @@ public class Hookah{
      
      - returns: Returns the new filtered array.
      */
-    public class func filter<T where T:CollectionType>(collection: T,@noescape predicate: T.Generator.Element throws -> Bool) rethrows -> [T.Generator.Element]{
-        var result : [T.Generator.Element] = []
-        try each(collection){
+    public class func filter<T>(collection: T,predicate: (T.Iterator.Element) throws -> Bool) rethrows -> [T.Iterator.Element] where T: Collection{
+        var result : [T.Iterator.Element] = []
+        try each(collection: collection){
             if try predicate($0){
                 result.append($0)
             }
@@ -137,7 +137,7 @@ public class Hookah{
      
      - returns: Boolean determined whether the value is presented.s
      */
-    public class func contains<T where T: CollectionType, T.Generator.Element: Equatable>(collection: T, value: T.Generator.Element) -> Bool{
+    public class func contains<T>(collection: T, value: T.Iterator.Element) -> Bool where T: Collection, T.Iterator.Element: Equatable{
         return collection.contains(value)
     }
     
@@ -149,7 +149,7 @@ public class Hookah{
      
      - returns: Boolean determined whether the value is presented.
      */
-    public class func includes<T where T: CollectionType, T.Generator.Element: Equatable>(collection: T, value: T.Generator.Element) -> Bool{
+    public class func includes<T>(collection: T, value: T.Iterator.Element) -> Bool where T: Collection, T.Iterator.Element: Equatable{
         return collection.contains(value)
     }
     
@@ -163,7 +163,7 @@ public class Hookah{
      
      - returns: Returns true if all elements pass the predicate check, else false.
      */
-    public class func every<T where T:CollectionType>(collection: T,@noescape predicate: T.Generator.Element throws -> Bool) rethrows -> Bool{
+    public class func every<T>(collection: T,predicate: (T.Iterator.Element) throws -> Bool) rethrows -> Bool where T: Collection{
         for element in collection{
             if try predicate(element) == false {
                 return false
@@ -182,7 +182,7 @@ public class Hookah{
      
      - returns: Returns true if any element passes the predicate check, else false.
      */
-    public class func some<T where T:CollectionType>(collection: T,@noescape predicate: T.Generator.Element throws -> Bool) rethrows -> Bool{
+    public class func some<T>(collection: T,predicate: (T.Iterator.Element) throws -> Bool) rethrows -> Bool where T: Collection{
         for element in collection{
             if try predicate(element) == true {
                 return true
@@ -201,10 +201,10 @@ public class Hookah{
      
      - returns: Returns the matched element, else nil.
      */
-    public class func find<T where T:CollectionType>(collection: T,@noescape predicate: T.Generator.Element throws -> Bool) rethrows -> T.Generator.Element?{
+    public class func find<T>(collection: T, predicate: (T.Iterator.Element) throws -> Bool) rethrows -> T.Iterator.Element? where T: Collection {
         
-        for element in collection{
-            if try predicate(element) == true{
+        for element in collection {
+            if try predicate(element) == true {
                 return element
             }
         }
@@ -221,8 +221,8 @@ public class Hookah{
      
      - returns: Returns the matched element, else nil.
      */
-    public class func findLast<T where T:CollectionType, T.Index == Int>(collection: T,@noescape predicate: T.Generator.Element throws -> Bool) rethrows -> T.Generator.Element?{
-        var length = collection.count;
+    public class func findLast<T>(collection: T,predicate: (T.Iterator.Element) throws -> Bool) rethrows -> T.Iterator.Element? where T: Collection, T.Index == Int{
+        var length = Int(collection.count);
         repeat{
             length -= 1
             if try predicate(collection[length]) == true{
@@ -242,9 +242,9 @@ public class Hookah{
      
      - returns: Returns the dictionary [String: [T]]
      */
-    public class func groupBy<T where T:CollectionType>(collection: T, @noescape iteratee: T.Generator.Element throws -> String) rethrows -> [String: [T.Generator.Element]]{
-        var result : [String: [T.Generator.Element]] = Dictionary()
-        try each(collection){
+    public class func groupBy<T>(collection: T, iteratee: (T.Iterator.Element) throws -> String) rethrows -> [String: [T.Iterator.Element]] where T: Collection{
+        var result : [String: [T.Iterator.Element]] = Dictionary()
+        try each(collection: collection){
             let key = try iteratee($0)
             result[key] == nil ? result[key] = [$0] : result[key]?.append($0)
         }
@@ -262,9 +262,9 @@ public class Hookah{
      
      - returns: Returns the accumulated value.
      */
-    public class func reduce<T,E where T:CollectionType>(collection: T,initial: E,  @noescape combine: (E, T.Generator.Element) throws -> E) rethrows -> E{
+    public class func reduce<T,E>(collection: T,initial: E,  combine: (E, T.Iterator.Element) throws -> E) rethrows -> E where T: Collection{
         var current = initial
-        try each(collection){
+        try each(collection: collection){
             current = try combine(current, $0)
         }
         return current
@@ -281,9 +281,9 @@ public class Hookah{
      
      - returns: Returns the accumulated value.
      */
-    public class func reduceRight<T,E where T:CollectionType, T.Index == Int>(collection: T,initial: E,  @noescape combine: (E, T.Generator.Element) throws -> E) rethrows -> E{
+    public class func reduceRight<T,E>(collection: T,initial: E,  combine: (E, T.Iterator.Element) throws -> E) rethrows -> E where T: Collection, T.Index == Int{
         var current = initial
-        try eachRight(collection){
+        try eachRight(collection: collection){
             current = try combine(current, $0)
         }
         return current
@@ -299,10 +299,10 @@ public class Hookah{
      
      - returns: Returns the new filtered array.
      */
-    public class func reject<T where T:CollectionType>(collection: T,@noescape predicate: T.Generator.Element throws -> Bool) rethrows -> [T.Generator.Element]{
-        return try filter(collection, predicate: { try !predicate($0) })
+    public class func reject<T>(collection: T, predicate: (T.Iterator.Element) throws -> Bool) rethrows -> [T.Iterator.Element] where T: Collection{
+        return try filter(collection: collection, predicate: { try !predicate($0) })
     }
-
+    
     /**
      Gets a random element from collection.
      
@@ -310,8 +310,8 @@ public class Hookah{
      
      - returns: The random element.
      */
-    public class func sample<T where T:CollectionType, T.Index == Int>(collection: T) -> T.Generator.Element{
-        return collection[Hookah.random(lower: 0, upper: collection.count - 1)]
+    public class func sample<T>(collection: T) -> T.Iterator.Element where T: Collection, T.Index == Int{
+        return collection[Hookah.random(lower: 0, upper: Int(collection.count - 1))]
     }
     
     /**
@@ -324,11 +324,11 @@ public class Hookah{
      
      - returns: Array of random elements
      */
-    public class func sampleSize<T where T:CollectionType, T.Index == Int>(collection: T, n: Int) -> [T.Generator.Element]{
+    public class func sampleSize<T>(collection: T, n: Int) -> [T.Iterator.Element] where T: Collection, T.Index == Int{
         let length = collection.count
-        let number = max(min(n, length), 0)
-        let result = shuffle(collection)
-        return slice(result, start: 0, end: number)
+        let number = max(min(n, Int(length)), 0)
+        let result = shuffle(collection: collection)
+        return slice(array: result, start: 0, end: number)
     }
     
     
@@ -341,9 +341,9 @@ public class Hookah{
      
      - returns: Returns the shuffled array.
      */
-    public class func shuffle<T where T:CollectionType, T.Index == Int>(collection: T) -> [T.Generator.Element]{
-        var result : [T.Generator.Element] = Array(collection)
-        let length = collection.count
+    public class func shuffle<T>(collection: T) -> [T.Iterator.Element] where T: Collection, T.Index == Int{
+        var result : [T.Iterator.Element] = Array(collection)
+        let length = Int(collection.count)
         for i in 0..<length{
             let j = Int(arc4random_uniform(UInt32(length - i))) + i
             let temp = result[i]
@@ -362,12 +362,12 @@ public class Hookah{
      
      - returns: The collection size.
      */
-    public class func size<T where T:CollectionType>(collection: T) -> Int{
-        if let count = collection.count as? Int{
+    public class func size<T>(collection: T) -> Int where T: Collection{
+        if let count = collection.count as? Int {
             return count
         } else {
             var size = 0
-            for _ in collection{
+            for _ in collection {
                 size += 1
             }
             return size
@@ -376,3 +376,4 @@ public class Hookah{
     
     
 }
+
